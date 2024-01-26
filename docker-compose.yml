@@ -1,0 +1,46 @@
+version: '3.8'
+services:
+
+  app:
+    build: ./
+    ports:
+      - 80:80
+      # - 443:443
+      # - 5173:5173
+    working_dir: /
+    image: sequia_app
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - app-network
+    # command: bash -c "php /var/www/html/artisan migrate:fresh --seed && php-fpm"
+
+  db:
+    image: postgis/postgis:13-3.1
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: sequia
+      POSTGRES_USER: sequia
+      POSTGRES_PASSWORD: sequia
+    volumes:
+      - ./database_local:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@sequia.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - 5050:80
+    networks:
+      - app-network
+    depends_on:
+      - db
+
+networks:
+  app-network:
