@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Protege el acceso al registro desde la barra de navegación del navegador
+Auth::routes(
+    ['register' => false]
+);
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');

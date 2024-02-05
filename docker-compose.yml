@@ -18,25 +18,27 @@ services:
     # command: bash -c "php /var/www/html/artisan migrate:fresh --seed && php-fpm"
 
   db:
-    image: postgis/postgis:13-3.1
+    image: mariadb:10.8
     ports:
-      - 5432:5432
+      - 3306:3306
     environment:
-      POSTGRES_DB: sequia
-      POSTGRES_USER: sequia
-      POSTGRES_PASSWORD: sequia
+      MYSQL_DATABASE: sequia
+      MYSQL_ROOT_PASSWORD: sequia
+      MYSQL_PASSWORD: sequia
+      MYSQL_USER: sequia
     volumes:
-      - ./database_local:/var/lib/postgresql/data
+      - ./database_local:/var/lib/mysql
     networks:
       - app-network
 
-  pgadmin:
-    image: dpage/pgadmin4:latest
+  phpmyadmin:
+    image: phpmyadmin:5.1.1
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@sequia.com
-      PGADMIN_DEFAULT_PASSWORD: admin
+      PMA_HOST: db
+      PMA_USER: sequia
+      PMA_PASSWORD: sequia
     ports:
-      - 5050:80
+      - 8080:80
     networks:
       - app-network
     depends_on:
