@@ -40,8 +40,6 @@ class Users extends Component
     {
         $this->users = User::all();
         $this->roles = Role::all();
-        // $this->facultades = Facultad::all();
-        // $this->cargos = Cargo::all();
         if ($this->user_id) {
             $this->users_roles = User_rol::select([
                 'users_roles.id',
@@ -56,9 +54,7 @@ class Users extends Component
             'users' => $this->users,
             'roles' => $this->roles,
             'users_roles' => $this->users_roles,
-            // 'facultades' => $this->facultades,
-            // 'cargos' => $this->cargos,
-        ])->layout('layouts.adminlte');
+            ])->layout('layouts.adminlte');
     }
 
 

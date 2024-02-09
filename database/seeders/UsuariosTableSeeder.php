@@ -14,13 +14,15 @@ class UsuariosTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $contrasenaHasheada = bcrypt('admin-sequia');
+        $contrasenaHasheada = bcrypt('admin-tronador');
 
         //inserto usuario admin
         $user = new User();
         $user->name = "Administrador";
-        $user->email = "administrador@sequia.com.ar";
+        $user->email = "administrador@tronador.com.ar";
         $user->lastname = "administrador";
+        $user->institution_id = 1; 
+        $user->nationality_id = 1; 
         $user->password = $contrasenaHasheada;
         $user->email_verified_at = now();
         $user->created_at = now();
@@ -36,14 +38,16 @@ class UsuariosTableSeeder extends Seeder
         $user_rol->save();
 
 
-        $contrasenaHasheada = bcrypt('editor-sequia');
+        $contrasenaHasheada = bcrypt('editor-tronador');
 
         //inserto usuario admin
         $user2 = new User();
         $user2->name = "Editor";
-        $user2->email = "editor@sequia.com.ar";
+        $user2->email = "editor@tronador.com.ar";
         $user2->lastname = "editor";
         $user2->password = $contrasenaHasheada;
+        $user2->institution_id = 1; 
+        $user2->nationality_id = 1; 
         $user2->email_verified_at = now();
         $user2->created_at = now();
         $user2->updated_at = now();

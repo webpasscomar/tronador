@@ -16,7 +16,16 @@ return new class extends Migration
             $table->string('name');
             $table->string('lastname');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('email_verified_at')->nullable(); 
+            $table->string('phone')->nullable();
+            $table->date('birthday')->nullable();    
+        	$table->tinyInteger('status')->default(1);
+            $table->foreignId('institution_id')
+				->nullable()
+				->constrained('institutions');
+            $table->foreignId('nationality_id')
+				->nullable()
+				->constrained('nationalities');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
