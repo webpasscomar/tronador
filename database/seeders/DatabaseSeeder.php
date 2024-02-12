@@ -17,11 +17,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RolesTableSeeder::class,
-            UsuariosTableSeeder::class,
             InstitutionsTableSeeder::class,
             TiposTableSeeder::class,
             TopicsTableSeeder::class,
-            NationalitiesTableSeeder::class
+            NationalitiesTableSeeder::class,
+            UsuariosTableSeeder::class
         ]);
     }
 }

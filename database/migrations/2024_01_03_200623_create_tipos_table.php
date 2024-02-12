@@ -12,6 +12,7 @@ class CreateTiposTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('icon');
+            $table->timestamps();
         });
     }
 

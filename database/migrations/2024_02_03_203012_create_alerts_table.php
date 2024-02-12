@@ -13,7 +13,7 @@ class CreateAlertsTable extends Migration
             $table->string('title');
             $table->text('summary');
             $table->datetime('date');
-            $table->foreignId('institution_id')->constrained('institution');
+            $table->foreignId('institution_id')->constrained('institutions');
             $table->string('owner');
             $table->tinyInteger('status')->default(1);    
             $table->timestamps();

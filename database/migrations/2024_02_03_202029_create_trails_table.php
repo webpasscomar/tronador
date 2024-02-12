@@ -13,7 +13,6 @@ class CreateTrailsTable extends Migration
             $table->string('name');
             $table->text('summary');
             // $table->foreignId('indicador_id')->constrained('indicadores');
-            // $table->enum('presentacion', ['Vectorial', 'Puntos', 'Poligono']);
             $table->string('image');
             $table->string('difficulty');
             $table->string('kms');
