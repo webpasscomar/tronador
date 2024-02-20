@@ -10,14 +10,20 @@ class CreateTrailsTable extends Migration
     {
         Schema::create('trails', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
             $table->string('name');
+            $table->text('resumen');
             $table->text('summary');
             // $table->foreignId('indicador_id')->constrained('indicadores');
             $table->string('image');
+            $table->string('dificultad');
             $table->string('difficulty');
             $table->string('kms');
+            $table->string('condicion'); 
             $table->string('condition'); 
+            $table->string('duracion');
             $table->string('duration');
+            $table->string('periodo');
             $table->string('period');
             $table->geometry('geom'); // Puedes cambiar el tipo según el tipo de dato GIS que uses
             $table->integer('order');

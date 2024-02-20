@@ -46,7 +46,7 @@
           <div class="small-box bg-success">
             <div class="inner">
               <h3>17</h3>
-              <p>Indicadores</p>
+              <p>Senderos</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -60,7 +60,7 @@
           <div class="small-box bg-warning">
             <div class="inner">
               <h3>12</h3>
-              <p>Usuarios</p>
+              <p>Alertas</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
@@ -74,7 +74,7 @@
           <div class="small-box bg-danger">
             <div class="inner">
               <h3>65</h3>
-              <p>Capas</p>
+              <p>Contenidos</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>

@@ -15,7 +15,7 @@ return [
     */
 
     'title' => 'Admin Panel',
-    'title_prefix' => 'Sequía -',
+    'title_prefix' => 'Piloto Tronador -',
     'title_postfix' => '',
 
     /*
@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<b class="fs-4 navbar-brand">Monitor</b>',
-    'logo_img' => 'img/sequia.ico',
+    'logo_img' => 'img/argentina.ico',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -87,7 +87,7 @@ return [
         'enabled' => false,
         'img' => [
             'path' => 'img/logo.png',
-            'alt' => 'Sequia Logo',
+            'alt' => 'Argentina Logo',
             'class' => '',
             'width' => 50,
             'height' => 50,
@@ -110,7 +110,7 @@ return [
         'enabled' => false,
         'img' => [
             'path' => 'img/logo.png',
-            'alt' => 'Monitor',
+            'alt' => 'Piloto Tronador',
             'effect' => 'animation__shake',
             'width' => 60,
             'height' => 60,

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Trail extends Model
 {
     protected $table = 'trails';
-    protected $fillable = ['name', 'image', 'difficulty', 'kms', 'condition', 'duration', 'period', 'summary', 'geom', 'order','status'];
+    protected $fillable = ['nombre', 'name', 'image', 'dificultad','difficulty', 'kms', 'condicion','condition', 'duracion','duration', 'periodo','period', 'resumen','summary', 'geom', 'order','status'];
     
     // Relación con el modelo References
     public function references(){

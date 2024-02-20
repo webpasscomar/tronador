@@ -21,6 +21,6 @@ class HomeController extends Controller
     public function index()
     {
         // $this->slides = Galeria::where('estado', 1)->get();
-        return view('home');
+        return view('admin.dashboard');
     }
 }
