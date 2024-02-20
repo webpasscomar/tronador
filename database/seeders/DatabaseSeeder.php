@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             TiposTableSeeder::class,
             TopicsTableSeeder::class,
             NationalitiesTableSeeder::class,
+            TrailsTableSeeder::class,
             UsuariosTableSeeder::class
         ]);
     }
