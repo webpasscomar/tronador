@@ -337,6 +337,7 @@
                 'text' => 'Tipos de Referencia',
                 'route' => 'admin.tipos',
                 'icon' => 'far fa-image',
+                'can' => 'task-admin'
             ],
             // [
             //     'text' => 'Novedades',

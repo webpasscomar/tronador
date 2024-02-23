@@ -24,8 +24,13 @@
                         @endif
                     @else
                         @if ($action === 'edit')
-                            <img class="img-fluid img-thumbnail" src="{{ asset('storage/iconos/' . $icon) }}"
-                                 alt="">
+                            @if (file_exists(public_path('storage/iconos/'.$icon)))
+                                <img class="img-fluid img-thumbnail" src="{{ asset('storage/iconos/'. $icon) }}"
+                                     alt="">
+                            @else
+                                <img class="img-fluid img-thumbnail" src="{{ asset('img/no_disponible.png') }}"
+                                     alt="no_disponible">
+                            @endif
                         @endif
                     @endif
                 </div>
