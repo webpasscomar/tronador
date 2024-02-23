@@ -1,13 +1,17 @@
 <?php
 
-namespace App\Models;
+    namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+    use Illuminate\Database\Eloquent\Model;
 
-class Tipo extends Model
-{
-    protected $table = 'tipos';
-    protected $fillable = ['nombre', 'name', 'icon'];
-
-     } 
+    class Tipo extends Model
+    {
+        protected $table = 'tipos';
+        protected $fillable = [
+            'nombre',
+            'name',
+            'icon',
+            'status'
+        ];
+    }
 

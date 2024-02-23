@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+//use Illuminate\Database\Eloquent\Relations\BelongsTo;
+//use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Institution extends Model
 {
@@ -22,6 +23,6 @@ class Institution extends Model
     }
     public function references()
     {
-        return $this->belongsToMany(Reference::class,'institution_id');
+        return $this->belongsTo(Reference::class,'institution_id');
     }
 }

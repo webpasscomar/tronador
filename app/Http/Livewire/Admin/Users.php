@@ -3,10 +3,10 @@
 namespace App\Http\Livewire\Admin;
 
 
-use Livewire\Component;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\User_rol;
+use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -54,7 +54,7 @@ class Users extends Component
             'users' => $this->users,
             'roles' => $this->roles,
             'users_roles' => $this->users_roles,
-            ])->layout('layouts.adminlte');
+        ])->layout('layouts.adminlte');
     }
 
 

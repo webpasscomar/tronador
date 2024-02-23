@@ -19,7 +19,6 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @livewireStyles
 
-
 @stop
 
 
@@ -37,7 +36,7 @@
     {{-- <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script> --}}
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#myTable').DataTable({
                 "language": {
                     "lengthMenu": "Mostrar _MENU_ elementos por página",
@@ -103,9 +102,8 @@
         });
 
 
-
         //emit mensaje negativo
-        Livewire.on('mensajeNegativo', function(mensaje) {
+        Livewire.on('mensajeNegativo', function (mensaje) {
             Swal.fire({
                 title: 'Atencion',
                 text: mensaje['mensaje'],
@@ -116,7 +114,7 @@
 
 
         //emit mensaje positivo
-        Livewire.on('mensajePositivo', function(mensaje) {
+        Livewire.on('mensajePositivo', function (mensaje) {
             Swal.fire({
                 title: 'Excelente!',
                 text: mensaje['mensaje'],
@@ -125,7 +123,7 @@
                 showconfirmButton: true
             })
         });
-
+        
         // Funcion que refresca los datatables c/ vez que se vuelve a renderizar un componente
         // document.addEventListener('livewire:load', function() {
 

@@ -17,7 +17,7 @@ class CreateReferencesTable extends Migration
             $table->foreignId('topic_id')->constrained('topics');
             $table->foreignId('trail_id')->constrained('trails');
             $table->foreignId('institution_id')->constrained('institutions');
-            $table->tinyInteger('status')->default(1);    
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
