@@ -147,8 +147,8 @@
                                     </div>
                                 </div>
                                 <select class="form-select" id="rolesSelected" aria-label="Default select example"
-                                        name="rolesSelected" wire:model="rolesSelected">
-                                    <option value="" selected>Seleccione un role</option>
+                                        wire:model="rolesSelected">
+                                    <option value="">Seleccione un role</option>
                                     @foreach ($roles as $rol)
                                         <option value="{{ $rol->id }}">{{ $rol->name }}
                                         </option>

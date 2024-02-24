@@ -3,10 +3,12 @@
     namespace App\Models;
 
     // use Illuminate\Contracts\Auth\MustVerifyEmail;
+    use App\Events\UserAction;
     use Illuminate\Database\Eloquent\Factories\HasFactory;
     use Illuminate\Database\Eloquent\Relations\BelongsTo;
     use Illuminate\Foundation\Auth\User as Authenticatable;
     use Illuminate\Notifications\Notifiable;
+    use Illuminate\Support\Facades\Auth;
     use Laravel\Sanctum\HasApiTokens;
 
     class User extends Authenticatable
@@ -65,4 +67,22 @@
             return $this->belongsTo(Nationality::class, 'nationality_id');
         }
 
+        public function audits()
+        {
+            return $this->hasMany(Audit::class);
+        }
+
+        /* Detectar campos modificados al actualizar usuarios, detectar cuando se crean usuarios y cuando se eliminan:
+            se toma el id del usuario que lo hizo, la acción, el detalle de la acción, el Id del usuario sobre el
+            cual se aplicó dicha acción y la fecha y hora en que lo hizo */
+        protected static function boot()
+        {
+            parent::boot();
+            //actualización
+            static::updating(function ($user) {
+                $changed = $user->getDirty();
+                $details = 'campos modificados: ' . implode(', ', array_keys($changed));
+                event(new UserAction(Auth::user(), 'update', $details, $user->id));
+            });
+        }
     }

@@ -3,6 +3,7 @@
     namespace App\Http\Livewire\Admin;
 
 
+    use App\Events\UserAction;
     use App\Models\Institution;
     use App\Models\Nationality;
     use App\Models\User;
@@ -10,7 +11,6 @@
     use App\Models\User_rol;
     use Livewire\Component;
     use Illuminate\Support\Facades\Auth;
-    use Illuminate\Support\Facades\Hash;
     use Illuminate\Support\Facades\Session;
 
     class Users extends Component
@@ -191,6 +191,12 @@
                 $user->roles()->sync($this->rolesSelected);
             }
 
+            //Emitir evento al crear usuario para la auditoria
+            if ($this->user_id === 0) {
+                $details = 'creo el usuario ' . $user->email;
+                event(new UserAction(Auth::user(), 'create', $details, $user->id));
+            }
+
             $this->closeModal();
             $this->resetInputFields();
             $this->emit('mensajePositivo', ['mensaje' => 'Operacion exitosa']);
@@ -199,7 +205,6 @@
         public function cambiapass()
         {
             $this->validate();
-
 
             User::updateOrCreate(
                 ['id' => $this->user_id],
@@ -215,7 +220,12 @@
 
         public function delete($id)
         {
-            User::find($id)->delete();
+            $user = User::find($id);
+            //Emitir evento al eliminar un usuario para la auditoria
+            $details = 'elimino el usuario ' . $user->email . ' con el id: ' . $user->id;
+            event(new UserAction(Auth::user(), 'delete', $details));
+
+            $user->delete();
             $this->emit('table');
         }
 
@@ -301,7 +311,6 @@
             $this->user_id = $id;
             $this->user_nombre_rol = User::where('id', '=', $id)->value('name');
 
-
             $this->users_roles = User_rol::select([
                 'users_roles.id',
                 'roles.name as rol_nombre'
@@ -333,6 +342,9 @@
                     'rol_id' => $this->user_rol_id
                 ]
             );
+            //Emitir evento al crear un role para la auditoria
+            $details = 'asigno un nuevo role al usuario ' . $this->user_nombre_rol;
+            event(new UserAction(Auth::user(), 'add role', $details, $this->user_id));
 
             $this->closeModalRole();
             $this->emit('mensajePositivo', ['mensaje' => 'Operacion exitosa']);
@@ -341,7 +353,11 @@
 
         public function deleteRole($id)
         {
-            User_rol::where('id', '=', $id)->delete();
+            $user_role = User_rol::where('id', '=', $id)->delete();
+            //Emitir evento al eliminar un role para la auditoria
+            $details = 'elimino un role al usuario ' . $this->user_nombre_rol;
+            event(new UserAction(Auth::user(), 'remove role', $details, $this->user_id));
+
             $this->emit('mensajePositivo', ['mensaje' => 'Operacion exitosa']);
         }
     }
