@@ -17,9 +17,12 @@
                 <div class="form-group">
                     @if ($changeImg)
                         @if (gettype($icon) === 'object')
-                            @if ($icon->extension() == 'png' || $icon->extension() == 'ico' || $icon->extension() == 'svg')
+                            @if ($icon->extension() == 'png' ||  $icon->extension() == 'svg')
                                 <img class="img-fluid img-thumbnail" src="{{ $icon->temporaryUrl() }}"
-                                     alt="">
+                                     alt="image_preview">
+                            @elseif($icon->extension() == 'ico')
+                                <img class="img-fluid img-thumbnail" src="{{asset('/img/no-preview.jpg')}}"
+                                     alt="no_preview">
                             @endif
                         @endif
                     @else

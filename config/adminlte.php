@@ -315,11 +315,7 @@
                 'text' => 'Usuarios',
                 'url' => 'admin/users',
                 'icon' => 'fas fa-fw fa-users',
-            ],
-            [
-                'text' => 'Organismos',
-                'url' => 'admin/organismos',
-                'icon' => 'fas fa-wrench',
+                'can' => 'task-admin'
             ],
             [
                 'text' => 'Instituciones',

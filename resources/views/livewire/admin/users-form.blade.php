@@ -139,16 +139,16 @@
                         </div>
                         {{--Role--}}
                         <div class="col-6 mb-2">
-                            <label class="sr-only" for="rolesSelected">Role</label>
+                            <label class="sr-only" for="rolesSelected">Rol</label>
                             <div class="input-group mb-2 mr-sm-2">
                                 <div class="input-group-prepend">
-                                    <div class="input-group-text">Role<span
+                                    <div class="input-group-text">Rol<span
                                             class="ms-1 text-danger fs-6 fw-semibold">*</span>
                                     </div>
                                 </div>
                                 <select class="form-select" id="rolesSelected" aria-label="Default select example"
                                         wire:model="rolesSelected">
-                                    <option value="">Seleccione un role</option>
+                                    <option value="">Seleccione un rol</option>
                                     @foreach ($roles as $rol)
                                         <option value="{{ $rol->id }}">{{ $rol->name }}
                                         </option>

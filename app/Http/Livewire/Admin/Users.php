@@ -47,8 +47,8 @@
         {
             $this->users = User::all();
             $this->roles = Role::all();
-            $nationalities = Nationality::all();
-            $institutions = Institution::all();
+            $nationalities = Nationality::where('status', 1)->get();
+            $institutions = Institution::where('status', 1)->get();
 
             if ($this->user_id) {
                 $this->users_roles = User_rol::select([

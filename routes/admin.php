@@ -21,13 +21,14 @@
     */
 
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/roles', Roles::class)->name('admin.roles');
-    Route::get('/users', Users::class)->name('admin.users');
+
 
     /*Protejo las rutas con el middleware AdminRole, para que los usuarios que no tengan el permiso de administrador
     no puedan acceder*/
     Route::middleware('adminRole')->group(function () {
         // Ruta Instituciones - Protegida
+        Route::get('/roles', Roles::class)->name('admin.roles');
+        Route::get('/users', Users::class)->name('admin.users');
         Route::get('/instituciones', Institutions::class)->name('admin.institutions');
         Route::get('/temas', Topics::class)->name('admin.topics');
         Route::get('/tipos', Tipos::class)->name('admin.tipos');
