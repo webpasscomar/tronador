@@ -8,11 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Alert extends Model
 {
     protected $table = 'alerts';
-    protected $fillable = ['title', 'summary', 'date', 'institution_id', 'owner', 'status'];
+    protected $fillable = ['titulo','title', 'descripcion','description', 'date', 'institution_id', 'status'];
 
-
-    public function institutions()
-    {
-      return $this->belongsTo(Institution::class, 'institution_id');
-    }
 }   
