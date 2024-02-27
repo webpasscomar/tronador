@@ -10,11 +10,13 @@ class CreateAlertsTable extends Migration
     {
         Schema::create('alerts', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('summary');
+            $table->string('titulo');
+            $table->string('title')->nullable();;
+            $table->text('descripcion')->nullable();
+            $table->text('description')->nullable();
             $table->datetime('date');
+            $table->datetime('finish');
             $table->foreignId('institution_id')->constrained('institutions');
-            $table->string('owner');
             $table->tinyInteger('status')->default(1);    
             $table->timestamps();
         });

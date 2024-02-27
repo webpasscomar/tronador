@@ -10,7 +10,9 @@ class CreatePointsTable extends Migration
     {
         Schema::create('points', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
             $table->string('name');
+            $table->text('descripcion');
             $table->text('description');
             $table->string('image');
             $table->string('lat');

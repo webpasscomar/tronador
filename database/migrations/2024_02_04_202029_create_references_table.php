@@ -10,7 +10,9 @@ class CreateReferencesTable extends Migration
     {
         Schema::create('references', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');            
             $table->string('name');
+            $table->text('descripcion');
             $table->text('description');
             $table->string('image');
             $table->string('pdf');
