@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Alert extends Model
 {
     protected $table = 'alerts';
-    protected $fillable = ['titulo','title', 'descripcion','description', 'date', 'institution_id', 'status'];
+    protected $fillable = ['titulo','title', 'descripcion','description', 'date', 'institution_id','finish','status'];
 
 }   
