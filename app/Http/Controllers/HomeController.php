@@ -20,7 +20,6 @@
          */
         public function index()
         {
-            // $this->slides = Galeria::where('estado', 1)->get();
-            return view('home');
+            return redirect('/login');
         }
     }

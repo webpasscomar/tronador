@@ -63,7 +63,7 @@
         |
         */
 
-        'logo' => '<b class="fs-4 navbar-brand">Monitor</b>',
+        'logo' => '<b class="fs-4 navbar-brand">Piloto Tronador</b>',
         'logo_img' => 'img/argentina.ico',
         'logo_img_class' => 'brand-image img-circle elevation-3',
         'logo_img_xl' => null,

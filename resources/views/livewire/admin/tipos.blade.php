@@ -31,9 +31,17 @@
                             <td class="align-middle">{{ $tipo->nombre }}</td>
                             <td class="align-middle">{{ $tipo->name }}</td>
                             <td class="align-middle" style="cursor: pointer"
-                                wire:click="openModalImage({{ $tipo->id }})"><img
-                                    src="{{ file_exists(public_path('storage/iconos/'.$tipo->icon)) ? asset('storage/iconos/' . $tipo->icon) : asset('img/no_disponible.png') }}"
-                                    alt="{{ $tipo->nombre }}" width="40" height="40"/>
+                                wire:click="openModalImage({{ $tipo->id }})">
+                                @if (file_exists(public_path('storage/iconos/'.$tipo->icon)) && $tipo->icon)
+                                    <img src="{{ asset('storage/iconos/'. $tipo->icon) }}" alt="{{ $tipo->nombre }}"
+                                         width="40" height="40"
+                                    >
+                                @else
+                                    <img
+                                        src="{{ asset('img/no_disponible.png') }}"
+                                        alt="no_disponible" width="40" height="40"
+                                    >
+                                @endif
                             </td>
                             <td class="align-middle">
                                 <div class="d-flex flex-md-row gap-1 justify-content-evenly">
@@ -53,7 +61,7 @@
                         @if ($showModalImage)
                             {{-- Mostrar modal de imagén amliada --}}
                             <x-modal-image
-                                image="{{ file_exists(public_path('storage/iconos/'.$currentImage)) ? asset('storage/iconos/' . $currentImage) : asset('img/no_disponible.png') }}"
+                                image="{{ file_exists(public_path('storage/iconos/'. $currentImage)) && $currentImage ? asset('storage/iconos/' . $currentImage) : asset('img/no_disponible.png') }}"
                                 title="{{ $currentTitle }}" imageId="{{ $key }}"/>
                         @endif
                     @endforeach
