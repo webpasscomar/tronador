@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Point extends Model
 {
     protected $table = 'points';
-    protected $fillable = ['name', 'image', 'lat', 'lng', 'description', 'trail_id', 'tipo_id','institution_id', 'status'];
+    protected $fillable = ['nombre','name', 'image', 'lat', 'lng', 'descripcion','description', 'trail_id', 'tipo_id','institution_id', 'status'];
 
     public function institutions()
     {
