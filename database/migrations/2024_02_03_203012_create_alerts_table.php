@@ -15,6 +15,7 @@ class CreateAlertsTable extends Migration
             $table->text('descripcion')->nullable();
             $table->text('description')->nullable();
             $table->datetime('date');
+            $table->datetime('finish');
             $table->foreignId('institution_id')->constrained('institutions');
             $table->tinyInteger('status')->default(1);    
             $table->timestamps();
