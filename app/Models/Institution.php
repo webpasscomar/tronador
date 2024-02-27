@@ -16,8 +16,7 @@ class Institution extends Model
     {
         return $this->hasMany(User::class, 'institution_id');
     }
-
-    public function alerts()
+    public function alers()
     {
         return $this->hasMany(Alert::class, 'institution_id');
     }
