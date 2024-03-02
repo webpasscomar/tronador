@@ -341,6 +341,12 @@ return [
             'icon' => 'fas fa-route',
             'can' => 'task-admin'
         ],
+        [
+            'text' => 'Referencias',
+            'route' => 'admin.references',
+            'icon' => 'far fa-map',
+            'can' => 'task-admin'
+        ]
         // [
         //     'text' => 'Novedades',
         //     'url' => 'admin/novedades',

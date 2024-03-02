@@ -12,7 +12,7 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: #3332">
                 <h5 class="modal-title" id="roleModalLabel">
-                    Senderos / Trails
+                    Referencia
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" wire:click="closeModal">
                     <span aria-hidden="true">&times;</span>
@@ -34,8 +34,8 @@
                         @endif
                     @else
                         @if ($action === 'edit')
-                            @if (file_exists(public_path('storage/senderos/' . $image)))
-                                <img class="img-fluid img-thumbnail" src="{{ asset('storage/senderos/' . $image) }}"
+                            @if (file_exists(public_path('storage/referencias/' . $image)))
+                                <img class="img-fluid img-thumbnail" src="{{ asset('storage/referencias/' . $image) }}"
                                     alt="">
                             @else
                                 <img class="img-fluid img-thumbnail" src="{{ asset('img/no_disponible.png') }}"
@@ -128,21 +128,26 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group"><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
-                            <label for="geom" class="custom-file-upload">Recorrido</label>
+                            <label for="pdf" class="custom-file-upload">Recorrido</label>
                             <span id="file-name"></span>
 
-                            <input type="file" id="geom"
-                                class="form-control {{ $preview ? 'nocursor' : '' }}" wire:model="geom"
+                            <input type="file" id="pdf" accept="application/pdf"
+                                class="form-control {{ $preview ? 'nocursor' : '' }}" wire:model="pdf"
                                 wire:change="selectFile" @disabled($preview)>
-                            @error('geom')
+                            @error('pdf')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
-                            @if ($geom)
+                            @if ($pdf)
                                 <p class="mt-1 ms-1">
                                     <i class="far fa-file-alt"></i>
                                     <span class="text-secondary"
-                                        title="{{ $geom }}">{{ Str::limit($geom, 20) }}</span>
+                                        title="{{ $pdf }}">{{ Str::limit($pdf->getClientOriginalName(), 20) }}</span>
                                 </p>
+                            @elseif (!$changeFile && $action == 'edit')
+                                <p class="mt-1 ms-1">
+                                    <i class="far fa-file-alt"></i>
+                                    <span class="text-secondary"
+                                        title="{{ $pdf }}">{{ Str::limit($pdf, 20) }}</span>
                             @endif
                         </div>
                     </div>
