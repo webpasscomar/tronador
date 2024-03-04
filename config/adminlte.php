@@ -68,7 +68,7 @@ return [
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'PS',
+    'logo_img_alt' => 'tronador',
 
     /*
         |--------------------------------------------------------------------------
@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'img/logo.png',
+            'path' => 'img/argentina.ico',
             'alt' => 'Argentina Logo',
             'class' => '',
             'width' => 50,
@@ -341,6 +341,12 @@ return [
             'icon' => 'fas fa-route',
             'can' => 'task-admin'
         ],
+        [
+            'text' => 'Referencias',
+            'route' => 'admin.references',
+            'icon' => 'far fa-map',
+            'can' => 'task-admin'
+        ]
         // [
         //     'text' => 'Novedades',
         //     'url' => 'admin/novedades',
