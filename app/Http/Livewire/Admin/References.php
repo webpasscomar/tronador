@@ -35,6 +35,7 @@ class References extends Component
         $descripcion,
         $description,
         $status,
+        $newFile,
         $preview = false;
 
 
@@ -54,7 +55,6 @@ class References extends Component
                 'pdf' => 'required|mimes:pdf|max:2048',
                 'topic_id' => 'required',
                 'institution_id' => 'required',
-                'trail_id' => 'required',
             ];
         } else { // Validaciones al editar registro
             return [
@@ -64,12 +64,29 @@ class References extends Component
                 'image' => $this->changeImg ? 'mimes:jpeg,png,jpg,svg|max:2048' : '',
                 'pdf' => $this->changeFile ? 'mimes:pdf|max:2048' : '',
                 'descripcion' => 'required',
-                'pdf' => 'required|mimes:pdf|max:2048',
                 'topic_id' => 'required',
                 'institution_id' => 'required',
                 'trail_id' => 'required',
             ];
         }
+    }
+
+    public function messages()
+    {
+        return [
+            'nombre.required' => 'Se debe ingresar un nombre',
+            'name.required' => 'Se debe ingresar un nombre',
+            'description.required' => 'Se debe ingresar una descripción',
+            'descripcion.required' => 'Se debe ingresar una descripción',
+            'topic_id.required' => 'Se debe seleccionar un tema',
+            'institution_id.required' => 'Se debe seleccionar una institución',
+            'image.required' => 'Se debe cargar una imagen',
+            'image.mimes' => 'Formatos permitidos: jpeg,png,jpg,svg',
+            'image.max' => 'El tamaño maximo es de 2MB',
+            'pdf.mimes' => 'Formatos permitidos: pdf',
+            'pdf.max' => 'El tamaño maximo es de 2MB',
+            'pdf.required' => 'Se debe cargar un archivo',
+        ];
     }
 
     // public function messages()
@@ -128,7 +145,7 @@ class References extends Component
         $this->reference = Reference::findOrFail($id);
 
         //insertar datos
-        $this->reference_id = $this->reference->reference->id;
+        $this->reference_id = $this->reference->id;
         $this->nombre = $this->reference->nombre;
         $this->name = $this->reference->name;
         $this->descripcion = $this->reference->descripcion;
@@ -189,7 +206,7 @@ class References extends Component
                 'description' => $this->description,
                 'descripcion' => $this->descripcion,
                 'image' => $image_name,
-                'pdf' => $this->pdf,
+                'pdf' => $file_name,
                 'institution_id' => $this->institution_id,
                 'topic_id' => $this->topic_id,
                 'trail_id' => $this->trail_id,
@@ -231,6 +248,7 @@ class References extends Component
             'trail_id',
             'status'
         ]);
+
         $this->reference_id = 0;
         $this->resetErrorBag();
     }

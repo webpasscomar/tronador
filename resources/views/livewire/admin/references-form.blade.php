@@ -8,7 +8,7 @@
 <div class="modal fade show" id="roleModal" tabindex="-1" role="dialog" aria-labelledby="roleModalLabel" aria-hidden="true"
     style="display: {{ $showModal }}; background-color:rgba(51,51,51,0.9);">
 
-    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #3332">
                 <h5 class="modal-title" id="roleModalLabel">
@@ -63,57 +63,24 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="resumen">Resumen</label><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
-                    <textarea id="resumen" rows="2" class="form-control {{ $preview ? 'nocursor' : '' }}" wire:model='resumen'
+                    <label for="descripcion">Descripción</label><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
+                    <textarea id="descripcion" rows="2" class="form-control {{ $preview ? 'nocursor' : '' }}" wire:model='descripcion'
                         @disabled($preview)></textarea>
-                    @error('resumen')
+                    @error('descripcion')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="summary">Summary</label><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
-                    <textarea id="summary" rows="2" class="form-control {{ $preview ? 'nocursor' : '' }}" wire:model='summary'
-                        @disabled($preview)></textarea>
-                    @error('summary')
+                    <label for="description">Description</label><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
+                    <textarea id="description" rows="2" class="form-control {{ $preview ? 'nocursor' : '' }}"
+                        wire:model='description' @disabled($preview)></textarea>
+                    @error('description')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="kms">Kms</label><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
-                            <input type="number" id="kms" class="form-control {{ $preview ? 'nocursor' : '' }}"
-                                wire:model='kms' min="0" @disabled($preview)>
-                            @error('kms')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="elevation">Elevación</label><span
-                                class="ms-1 text-danger fs-6 fw-semibold">*</span>
-                            <input type="number" id="elevation" class="form-control {{ $preview ? 'nocursor' : '' }}"
-                                wire:model='elevation' min="0" @disabled($preview)>
-                            @error('elevation')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="order">Orden</label>
-                            <input type="number" id="order" class="form-control {{ $preview ? 'nocursor' : '' }}"
-                                wire:model='order' min="0" @disabled($preview)>
-                            @error('order')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group"><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
                             <label for="image" class="custom-file-upload">Imágen</label>
                             <span id="file-name"></span>
@@ -126,81 +93,89 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group"><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
-                            <label for="pdf" class="custom-file-upload">Recorrido</label>
-                            <span id="file-name"></span>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="pdf" class="custom-file-upload">Pdf</label><span
+                                class="ms-1 text-danger fs-6 fw-semibold">*
 
-                            <input type="file" id="pdf" accept="application/pdf"
-                                class="form-control {{ $preview ? 'nocursor' : '' }}" wire:model="pdf"
-                                wire:change="selectFile" @disabled($preview)>
-                            @error('pdf')
+                                <input type="file" id="pdf" accept="application/pdf"
+                                    class="form-control {{ $preview ? 'nocursor' : '' }}" wire:model="pdf"
+                                    wire:change="selectFile" @disabled($preview)>
+                                @error('pdf')
+                                    <span class="text-danger fw-normal">{{ $message }}</span>
+                                @enderror
+                                @if ($changeFile)
+                                    @if (gettype($pdf) === 'object')
+                                        <p class="mt-1 ms-1">
+                                            <i class="far fa-file-alt"></i>
+                                            <span class="text-secondary" title="{{ $pdf->getClientOriginalName() }}">
+                                                {{ Str::limit($pdf->getClientOriginalName(), 20) }}
+                                            </span>
+                                        </p>
+                                    @endif
+                                @endif
+                                @if (gettype($pdf) === 'string')
+                                    <p class="mt-1 ms-1">
+                                        <i class="far fa-file-alt"></i>
+                                        <span class="text-secondary" title="{{ $reference->pdf }}">
+                                            {{ Str::limit($reference->pdf, 20) }}
+                                        </span>
+                                    </p>
+                                @endif
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="institution_id">Fuente</label><span
+                                class="ms-1 text-danger fs-6 fw-semibold">*</span>
+                            <select class="form-select {{ $preview ? 'nocursor' : '' }}" wire:model="institution_id"
+                                @disabled($preview)>
+                                <option value="">Seleccione una institución</option>
+                                @foreach ($institutions as $institution)
+                                    <option value="{{ $institution->id }}">{{ $institution->initial }}</option>
+                                @endforeach
+                            </select>
+                            @error('institution_id')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
-                            @if ($pdf)
-                                <p class="mt-1 ms-1">
-                                    <i class="far fa-file-alt"></i>
-                                    <span class="text-secondary"
-                                        title="{{ $pdf }}">{{ Str::limit($pdf->getClientOriginalName(), 20) }}</span>
-                                </p>
-                            @elseif (!$changeFile && $action == 'edit')
-                                <p class="mt-1 ms-1">
-                                    <i class="far fa-file-alt"></i>
-                                    <span class="text-secondary"
-                                        title="{{ $pdf }}">{{ Str::limit($pdf, 20) }}</span>
-                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="topic_id">Tema</label><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
+                            <select class="form-select {{ $preview ? 'nocursor' : '' }}" wire:model="topic_id"
+                                @disabled($preview)>
+                                <option value="">Seleccione el tema</option>
+                                @foreach ($topics as $topic)
+                                    <option value="{{ $topic->id }}">{{ $topic->nombre }}</option>
+                                @endforeach
+                            </select>
+                            @error('topic_id')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="trail_id">Sendero</label>
+                            <select class="form-select {{ $preview ? 'nocursor' : '' }}" wire:model="trail_id"
+                                @disabled($preview)>
+                                <option value="">Seleccione el sendero</option>
+                                @foreach ($trails as $trail)
+                                    <option value="{{ $trail->id }}">{{ $trail->nombre }}</option>
+                                @endforeach
+                            </select>
+                            @error('trail_id')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="dificultad">Dificultad</label><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
-                    <input type="text" class="form-control {{ $preview ? 'nocursor' : '' }}"
-                        wire:model="dificultad" @disabled($preview)>
-                    @error('dificultad')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="difficulty">Difficulty</label><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
-                    <input type="text" class="form-control {{ $preview ? 'nocursor' : '' }}"
-                        wire:model="difficulty" @disabled($preview)>
-                    @error('difficulty')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="duracion">Duración</label><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
-                    <input type="text" class="form-control {{ $preview ? 'nocursor' : '' }}"
-                        wire:model="duracion" @disabled($preview)>
-                    @error('duracion')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="duration">Duration</label><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
-                    <input type="text" class="form-control {{ $preview ? 'nocursor' : '' }}"
-                        wire:model="duration" @disabled($preview)>
-                    @error('duration')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="periodo">Periodo</label><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
-                    <input type="text" class="form-control {{ $preview ? 'nocursor' : '' }}" wire:model="periodo"
-                        @disabled($preview)>
-                    @error('periodo')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="period">Period</label><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
-                    <input type="text" class="form-control {{ $preview ? 'nocursor' : '' }}" wire:model="period"
-                        @disabled($preview)>
-                    @error('period')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
+                {{-- Campos obligatorios --}}
                 <div class="me-3 text-end">
                     <p class="fw-semibold" style="font-size: 12px;"><span
                             class="text-danger fs-6 fw-semibold">*</span>

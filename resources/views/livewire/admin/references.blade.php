@@ -26,9 +26,8 @@
                     <tbody>
                         @foreach ($references as $key => $reference)
                             <tr>
-                                <td scope="row" class="align-middle" data-bs-toggle="popover" data-bs-trigger="hover"
-                                    data-bs-placement="top" data-bs-content="{{ $reference->id }}">
-                                    {{ Str::limit($reference->nombre, 100) }}</td>
+                                <td class="align-middle">{{ $reference->id }}</td>
+                                <td class="align-middle">{{ Str::limit($reference->nombre, 100) }}</td>
                                 <td class="align-middle">{{ Str::limit($reference->topics->nombre, 40) }}</td>
                                 <td class="align-middle">
                                     <div class="d-flex flex-md-row gap-1 justify-content-evenly">

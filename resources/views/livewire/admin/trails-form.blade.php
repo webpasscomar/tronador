@@ -127,8 +127,9 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group"><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
-                            <label for="geom" class="custom-file-upload">Recorrido</label>
+                        <div class="form-group">
+                            <label for="geom" class="custom-file-upload">Recorrido</label><span
+                                class="ms-1 text-danger fs-6 fw-semibold">*</span>
                             <span id="file-name"></span>
 
                             <input type="file" id="geom"
@@ -144,6 +145,27 @@
                                         title="{{ $geom }}">{{ Str::limit($geom, 20) }}</span>
                                 </p>
                             @endif
+                            {{-- TODO: Revisar cuando se implemene bien la función --}}
+                            {{-- @if ($changeFile)
+                                @if (gettype($geom) === 'object')
+                                    <p class="mt-1 ms-1">
+                                        <i class="far fa-file-alt text-danger"></i>
+                                        <span class="text-secondary" title="{{ $geom->getClientOriginalName() }}">
+                                            {{ Str::limit($geom->getClientOriginalName(), 20) }}
+                                        </span>
+                                    </p>
+                                @endif
+                            @endif
+                            @if (gettype($geom) === 'string')
+                                <p class="mt-1 ms-1">
+                                    <i class="far fa-file-alt text-danger"></i>
+                                    <span class="text-secondary" title="{{ $trail->geom }}">
+                                        {{ Str::limit($trail->geom, 20) }}
+                                    </span>
+                                </p>
+                            @endif --}}
+                            {{-- ========================================== --}}
+
                         </div>
                     </div>
                 </div>
