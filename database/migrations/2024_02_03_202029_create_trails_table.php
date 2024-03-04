@@ -19,14 +19,14 @@ class CreateTrailsTable extends Migration
             $table->string('dificultad');
             $table->string('difficulty');
             $table->string('kms');
-            $table->string('elevation'); 
+            $table->string('elevation');
             $table->string('duracion');
             $table->string('duration');
             $table->string('periodo');
             $table->string('period');
             $table->string('geom'); // Puedes cambiar el tipo según el tipo de dato GIS que uses
             $table->integer('order');
-            $table->tinyInteger('status')->default(1);    
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
