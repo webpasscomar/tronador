@@ -30,10 +30,10 @@
                                 {{-- <td class="align-middle">{{ Str::limit($reference->nombre, 100) }}</td> --}}
                                 <td scope="row" class="align-middle" data-bs-toggle="popover" data-bs-trigger="hover"
                                     data-bs-placement="top" data-bs-content="{{ $point->nombre }}">
-                                    {{ Str::limit($trail->nombre, 50) }}</td>
+                                    {{ Str::limit($point->nombre, 50) }}</td>
                                 <td scope="row" class="align-middle" data-bs-toggle="popover" data-bs-trigger="hover"
                                     data-bs-placement="top" data-bs-content="{{ $point->trails->nombre }}">
-                                    {{ Str::limit($trail->nombre, 50) }}</td>
+                                    {{ Str::limit($point->trails->nombre, 50) }}</td>
                                 {{-- <td class="align-middle">{{ Str::limit($reference->topics->nombre, 40) }}</td> --}}
                                 <td class="align-middle">
                                     <div class="d-flex flex-md-row gap-1 justify-content-evenly">

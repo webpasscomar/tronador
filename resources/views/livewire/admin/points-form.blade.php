@@ -117,8 +117,8 @@
                                 @if (gettype($pdf) === 'string')
                                     <p class="mt-1 ms-1">
                                         <i class="far fa-file-alt"></i>
-                                        <span class="text-secondary" title="{{ $reference->pdf }}">
-                                            {{ Str::limit($reference->pdf, 20) }}
+                                        <span class="text-secondary" title="{{ $point->pdf }}">
+                                            {{ Str::limit($point->pdf, 20) }}
                                         </span>
                                     </p>
                                 @endif
@@ -143,9 +143,36 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="lat">Latitud</label><span
+                                class="ms-1 text-danger fs-6 fw-semibold">*</span>
+                            <input id="lat" type="text"
+                                class="form-control {{ $preview ? 'nocursor' : '' }}" wire:model="lat"
+                                @disabled($preview)>
+                            @error('lat')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="lng">Longitud</label><span
+                                class="ms-1 text-danger fs-6 fw-semibold">*</span>
+                            <input id="lng" type="text"
+                                class="form-control {{ $preview ? 'nocursor' : '' }}" wire:model="lng"
+                                @disabled($preview)>
+                            @error('lng')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-8">
                         <div class="form-group">
-                            <label for="trail_id">Sendero</label>
+                            <label for="trail_id">Sendero</label><span
+                                class="ms-1 text-danger fs-6 fw-semibold">*</span>
                             <select class="form-select {{ $preview ? 'nocursor' : '' }}" wire:model="trail_id"
                                 @disabled($preview)>
                                 <option value="">Seleccione el sendero</option>

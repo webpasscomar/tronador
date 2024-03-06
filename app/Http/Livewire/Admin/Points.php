@@ -41,7 +41,6 @@ class Points extends Component
 
     use WithFileUploads;
 
-
     // Reglas de validación
     protected function rules()
     {
@@ -84,7 +83,8 @@ class Points extends Component
             'name.required' => 'Se debe ingresar un nombre',
             'description.required' => 'Se debe ingresar una descripción',
             'descripcion.required' => 'Se debe ingresar una descripción',
-            'topic_id.required' => 'Se debe seleccionar un tema',
+            'tipo_id.required' => 'Se debe seleccionar un tipo de referencia',
+            'trail_id' => 'Se debe seleccionar un sendero',
             'institution_id.required' => 'Se debe seleccionar una institución',
             'image.required' => 'Se debe cargar una imagen',
             'image.mimes' => 'Formatos permitidos: jpeg,png,jpg,svg',
@@ -92,6 +92,10 @@ class Points extends Component
             'pdf.mimes' => 'Formatos permitidos: pdf',
             'pdf.max' => 'El tamaño maximo es de 2MB',
             'pdf.required' => 'Se debe cargar un archivo',
+            'lat.required' => 'Se debe cargar una latitud',
+            'lat.decimal' => 'Ingrese un número',
+            'lng.required' => 'Se debe cargar una longitud',
+            'lng.decimal' => 'Ingrese un número',
         ];
     }
 
@@ -195,7 +199,7 @@ class Points extends Component
 
         // Guardamos ó actualizamos los datos , según la coincidencia o no del id
         Point::updateOrCreate(
-            ['id' => $this->reference_id],
+            ['id' => $this->point_id],
             [
                 'nombre' => $this->nombre,
                 'name' => $this->name,
