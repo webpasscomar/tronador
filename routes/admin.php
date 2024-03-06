@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Livewire\Admin\Roles;
 use App\Http\Livewire\Admin\Users;
 use App\Http\Livewire\Admin\Institutions;
+use App\Http\Livewire\Admin\Points;
 use App\Http\Livewire\Admin\References;
 use App\Http\Livewire\Admin\Topics;
 use App\Http\Livewire\Admin\Tipos;
@@ -35,4 +36,5 @@ Route::middleware('adminRole')->group(function () {
     Route::get('/tipos', Tipos::class)->name('admin.tipos');
     Route::get('/senderos', Trails::class)->name('admin.trails');
     Route::get('/referencias', References::class)->name('admin.references');
+    Route::get('/puntos', Points::class)->name('admin.points');
 });

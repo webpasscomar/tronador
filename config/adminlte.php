@@ -346,6 +346,12 @@ return [
             'route' => 'admin.references',
             'icon' => 'far fa-map',
             'can' => 'task-admin'
+        ],
+        [
+            'text' => 'Puntos / Points',
+            'route' => 'admin.points',
+            'icon' => 'fas fa-map-marker-alt',
+            'can' => 'task-admin'
         ]
         // [
         //     'text' => 'Novedades',

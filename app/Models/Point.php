@@ -10,19 +10,31 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Point extends Model
 {
     protected $table = 'points';
-    protected $fillable = ['nombre','name', 'image', 'lat', 'lng', 'descripcion','description', 'trail_id', 'tipo_id','institution_id', 'status'];
+    protected $fillable = [
+        'nombre',
+        'name',
+        'image',
+        'pdf',
+        'lat',
+        'lng',
+        'descripcion',
+        'description',
+        'trail_id',
+        'tipo_id',
+        'institution_id',
+        'status'
+    ];
 
     public function institutions()
     {
-      return $this->belongsTo(Institution::class, 'institution_id');
+        return $this->belongsTo(Institution::class, 'institution_id');
     }
     public function tipos()
     {
-      return $this->belongsTo(Tipo::class, 'tipo_id');
+        return $this->belongsTo(Tipo::class, 'tipo_id');
     }
     public function trails()
     {
-      return $this->belongsTo(Trail::class, 'trail_id');
+        return $this->belongsTo(Trail::class, 'trail_id');
     }
-
 }

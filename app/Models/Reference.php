@@ -9,7 +9,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Reference extends Model
 {
     protected $table = 'references';
-    protected $fillable = ['nombre', 'name', 'image', 'descripcion', 'description', 'pdf', 'topic_id', 'trail_id', 'institution_id', 'status'];
+    protected $fillable = [
+        'nombre',
+        'name',
+        'image',
+        'descripcion',
+        'description',
+        'pdf',
+        'topic_id',
+        'trail_id',
+        'institution_id',
+        'status'
+    ];
 
     public function institutions()
     {

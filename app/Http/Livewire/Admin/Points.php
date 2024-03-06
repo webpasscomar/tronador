@@ -2,26 +2,26 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\Reference;
 use App\Models\Institution;
-use App\Models\Topic;
+use App\Models\Point;
+use App\Models\Tipo;
 use App\Models\Trail;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class References extends Component
+class Points extends Component
 {
-    protected $references;
-    protected $institutions;
+    protected $points;
     protected $trails;
-    protected $topics;
+    protected $tipos;
+    protected $institutions;
     protected $listeners = ['delete', 'updateTable'];
 
     public $showModal = 'none';
     public
-        $reference_id,
-        $reference,
+        $point_id,
+        $point,
         $action,
         $changeImg = false,
         $changeFile = false,
@@ -29,16 +29,18 @@ class References extends Component
         $pdf,
         $name,
         $nombre,
-        $topic_id,
         $institution_id,
         $trail_id,
+        $tipo_id,
+        $lat,
+        $lng,
         $descripcion,
         $description,
         $status,
         $preview = false;
 
-
     use WithFileUploads;
+
 
     // Reglas de validación
     protected function rules()
@@ -52,8 +54,11 @@ class References extends Component
                 'descripcion' => 'required',
                 'image' => 'required|mimes:jpeg,png,jpg,svg|max:2048',
                 'pdf' => 'required|mimes:pdf|max:2048',
-                'topic_id' => 'required',
+                'tipo_id' => 'required',
                 'institution_id' => 'required',
+                'trail_id' => 'required',
+                'lat' => 'required|decimal:0,10',
+                'lng' => 'required|decimal:0,10'
             ];
         } else { // Validaciones al editar registro
             return [
@@ -63,8 +68,11 @@ class References extends Component
                 'image' => $this->changeImg ? 'mimes:jpeg,png,jpg,svg|max:2048' : '',
                 'pdf' => $this->changeFile ? 'mimes:pdf|max:2048' : '',
                 'descripcion' => 'required',
-                'topic_id' => 'required',
+                'tipo_id' => 'required',
                 'institution_id' => 'required',
+                'trail_id' => 'required',
+                'lat' => 'required|decimal:0,10',
+                'lng' => 'required|decimal:0,10'
             ];
         }
     }
@@ -89,16 +97,17 @@ class References extends Component
 
     public function render()
     {
-        $this->references = Reference::all();
+        $this->points = Point::all();
         $this->institutions = Institution::where('status', 1)->get();
         $this->trails = Trail::where('status', 1)->get();
-        $this->topics = Topic::where('status', 1)->get();
+        $this->tipos = Tipo::where('status', 1)->get();
 
-        return view('livewire.admin.references', [
-            'references' => $this->references,
+
+        return view('livewire.admin.points', [
+            'points' => $this->points,
             'institutions' => $this->institutions,
             'trails' => $this->trails,
-            'topics' => $this->topics
+            'tipos' => $this->tipos
         ])->layout('layouts.adminlte');
     }
 
@@ -127,19 +136,21 @@ class References extends Component
         $this->action = 'edit';
 
         // Buscar registo
-        $this->reference = Reference::findOrFail($id);
+        $this->point = Point::findOrFail($id);
 
         //insertar datos
-        $this->reference_id = $this->reference->id;
-        $this->nombre = $this->reference->nombre;
-        $this->name = $this->reference->name;
-        $this->descripcion = $this->reference->descripcion;
-        $this->description = $this->reference->description;
-        $this->image = $this->reference->image;
-        $this->pdf = $this->reference->pdf;
-        $this->institution_id = $this->reference->institution_id;
-        $this->trail_id = $this->reference->trail_id;
-        $this->topic_id = $this->reference->topic_id;
+        $this->point_id = $this->point->id;
+        $this->nombre = $this->point->nombre;
+        $this->name = $this->point->name;
+        $this->descripcion = $this->point->descripcion;
+        $this->description = $this->point->description;
+        $this->image = $this->point->image;
+        $this->pdf = $this->point->pdf;
+        $this->institution_id = $this->point->institution_id;
+        $this->tipo_id = $this->point->tipo_id;
+        $this->trail_id = $this->point->trail_id;
+        $this->lat = $this->point->lat;
+        $this->lng = $this->point->lng;
 
         //Abrir modal en modo edición
         $this->openModal();
@@ -152,14 +163,14 @@ class References extends Component
         // si se cambia la imagen cuando editamos el registro, borramos la imagen anterior y guardamos la nueva.
         if ($this->changeImg && $this->action == 'edit') {
             //eliminamos la imagen anterior buscando primero el registro que contiene esa imágen
-            $reference = Reference::findOrFail($this->reference_id);
-            Storage::disk('public')->delete('referencias/' . $reference->image);
+            $point = Point::findOrFail($this->point_id);
+            Storage::disk('public')->delete('puntos/' . $point->image);
         }
 
         // Si se elige una imagen cuando creamos un registro se guarda con su nombre original
         if ($this->changeImg) {
             $image_name = $this->image->getClientOriginalName();
-            $this->image->storeAs('referencias', $image_name);
+            $this->image->storeAs('puntos', $image_name);
             $this->changeImg = false;
         } else {
             /* En el caso que se este editando y no se elija una imágen nueva se toma la imágen que está guardada*/
@@ -168,14 +179,14 @@ class References extends Component
 
         // Si estamos editando y se elige un archivo pdf se borra el anterior para poder guardar el nuevo previamente buscando el registro correspondiente
         if ($this->changeFile && $this->action == 'edit') {
-            $reference = Reference::findOrFail($this->reference_id);
-            Storage::disk('public')->delete('referencias/' . $reference->pdf);
+            $point = Point::findOrFail($this->point_id);
+            Storage::disk('public')->delete('puntos/' . $point->pdf);
         }
 
         //si existe un arhivo pdf se guarda en la base de datos
         if ($this->changeFile) {
             $file_name = $this->pdf->getClientOriginalName();
-            $this->pdf->storeAs('referencias', $file_name);
+            $this->pdf->storeAs('puntos', $file_name);
             $this->changeFile = false;
         } else {
             // En el caso que se este editando sino se elija un archivo pdf se toma el archivo que está guardado
@@ -183,7 +194,7 @@ class References extends Component
         }
 
         // Guardamos ó actualizamos los datos , según la coincidencia o no del id
-        Reference::updateOrCreate(
+        Point::updateOrCreate(
             ['id' => $this->reference_id],
             [
                 'nombre' => $this->nombre,
@@ -192,8 +203,10 @@ class References extends Component
                 'descripcion' => $this->descripcion,
                 'image' => $image_name,
                 'pdf' => $file_name,
+                'lat' => $this->lat,
+                'lng' => $this->lng,
                 'institution_id' => $this->institution_id,
-                'topic_id' => $this->topic_id,
+                'tipo_id' => $this->tipo_id,
                 'trail_id' => $this->trail_id,
                 'status' => 1
             ]
@@ -209,12 +222,12 @@ class References extends Component
     //        public function delete($id)
     //        {
     //            // Buscamos el registro y borramos la imágen asociada a ese registro
-    //    $reference = Reference::findOrFail($id);
-    //            Storage::disk('public')->delete('referencias/' . $reference->image);
+    //    $point = Point::findOrFail($id);
+    //            Storage::disk('public')->delete('puntos/' . $point->image);
     //            // Eliminamos el registro
-    //            $reference->delete();
+    //            $point->delete();
     //
-    //            $this->emit('mensajePositivo', ['mensaje' => 'Referencia eliminada correctamente']);
+    //            $this->emit('mensajePositivo', ['mensaje' => 'Punto eliminado correctamente']);
     //            $this->emit('table');
     //        }
 
@@ -228,13 +241,15 @@ class References extends Component
             'descripcion',
             'image',
             'pdf',
+            'lat',
+            'lng',
             'institution_id',
-            'topic_id',
+            'tipo_id',
             'trail_id',
             'status'
         ]);
 
-        $this->reference_id = 0;
+        $this->point_id = 0;
         $this->resetErrorBag();
     }
 
