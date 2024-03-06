@@ -17,7 +17,7 @@ class CreateAlertsTable extends Migration
             $table->datetime('date');
             $table->datetime('finish');
             $table->foreignId('institution_id')->constrained('institutions');
-            $table->tinyInteger('status')->default(1);    
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

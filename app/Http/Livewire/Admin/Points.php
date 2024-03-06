@@ -76,7 +76,7 @@ class Points extends Component
         }
     }
 
-    public function messages()
+    protected function messages()
     {
         return [
             'nombre.required' => 'Se debe ingresar un nombre',

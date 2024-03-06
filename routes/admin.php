@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Livewire\Admin\Alerts;
 use App\Http\Livewire\Admin\Roles;
 use App\Http\Livewire\Admin\Users;
 use App\Http\Livewire\Admin\Institutions;
@@ -37,4 +38,5 @@ Route::middleware('adminRole')->group(function () {
     Route::get('/senderos', Trails::class)->name('admin.trails');
     Route::get('/referencias', References::class)->name('admin.references');
     Route::get('/puntos', Points::class)->name('admin.points');
+    Route::get('/alertas', Alerts::class)->name('admin.alerts');
 });

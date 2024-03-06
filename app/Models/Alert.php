@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Alert extends Model
 {
     protected $table = 'alerts';
-    protected $fillable = ['titulo','title', 'descripcion','description', 'date','finish', 'institution_id', 'status'];
-
-}   
+    protected $fillable = [
+        'titulo',
+        'title',
+        'descripcion',
+        'description',
+        'date',
+        'finish',
+        'institution_id',
+        'status'
+    ];
+}

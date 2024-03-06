@@ -352,6 +352,12 @@ return [
             'route' => 'admin.points',
             'icon' => 'fas fa-map-marker-alt',
             'can' => 'task-admin'
+        ],
+        [
+            'text' => 'Alertas / Alerts',
+            'route' => 'admin.alerts',
+            'icon' => 'far fa-bell',
+            'can' => 'task-admin'
         ]
         // [
         //     'text' => 'Novedades',
