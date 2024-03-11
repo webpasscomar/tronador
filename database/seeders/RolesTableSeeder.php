@@ -22,5 +22,10 @@ class RolesTableSeeder extends Seeder
         $rol2->id     = 2;
         $rol2->name = 'Editor';
         $rol2->save();
+
+        $rol3 = new Role();
+        $rol3->id     = 3;
+        $rol3->name = 'Sat';
+        $rol3->save();
     }
 }
