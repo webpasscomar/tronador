@@ -1,11 +1,11 @@
 <?php
 
-    use Illuminate\Support\Facades\Facade;
-    use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\ServiceProvider;
 
-    return [
+return [
 
-        /*
+    /*
         |--------------------------------------------------------------------------
         | Application Name
         |--------------------------------------------------------------------------
@@ -16,9 +16,9 @@
         |
         */
 
-        'name' => env('APP_NAME', 'Tronador'),
+    'name' => env('APP_NAME', 'Tronador'),
 
-        /*
+    /*
         |--------------------------------------------------------------------------
         | Application Environment
         |--------------------------------------------------------------------------
@@ -29,9 +29,9 @@
         |
         */
 
-        'env' => env('APP_ENV', 'development'),
+    'env' => env('APP_ENV', 'production'),
 
-        /*
+    /*
         |--------------------------------------------------------------------------
         | Application Debug Mode
         |--------------------------------------------------------------------------
@@ -42,9 +42,9 @@
         |
         */
 
-        'debug' => (bool)env('APP_DEBUG', true),
+    'debug' => (bool)env('APP_DEBUG', true),
 
-        /*
+    /*
         |--------------------------------------------------------------------------
         | Application URL
         |--------------------------------------------------------------------------
@@ -55,11 +55,11 @@
         |
         */
 
-        'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://localhost'),
 
-        'asset_url' => env('ASSET_URL'),
+    'asset_url' => env('ASSET_URL'),
 
-        /*
+    /*
         |--------------------------------------------------------------------------
         | Application Timezone
         |--------------------------------------------------------------------------
@@ -70,9 +70,9 @@
         |
         */
 
-        'timezone' => 'America/Argentina/Buenos_Aires',
+    'timezone' => 'America/Argentina/Buenos_Aires',
 
-        /*
+    /*
         |--------------------------------------------------------------------------
         | Application Locale Configuration
         |--------------------------------------------------------------------------
@@ -83,9 +83,9 @@
         |
         */
 
-        'locale' => 'es',
+    'locale' => 'es',
 
-        /*
+    /*
         |--------------------------------------------------------------------------
         | Application Fallback Locale
         |--------------------------------------------------------------------------
@@ -96,9 +96,9 @@
         |
         */
 
-        'fallback_locale' => 'en',
+    'fallback_locale' => 'en',
 
-        /*
+    /*
         |--------------------------------------------------------------------------
         | Faker Locale
         |--------------------------------------------------------------------------
@@ -109,9 +109,9 @@
         |
         */
 
-        'faker_locale' => 'en_US',
+    'faker_locale' => 'en_US',
 
-        /*
+    /*
         |--------------------------------------------------------------------------
         | Encryption Key
         |--------------------------------------------------------------------------
@@ -122,11 +122,11 @@
         |
         */
 
-        'key' => env('APP_KEY'),
+    'key' => env('APP_KEY'),
 
-        'cipher' => 'AES-256-CBC',
+    'cipher' => 'AES-256-CBC',
 
-        /*
+    /*
         |--------------------------------------------------------------------------
         | Maintenance Mode Driver
         |--------------------------------------------------------------------------
@@ -139,12 +139,12 @@
         |
         */
 
-        'maintenance' => [
-            'driver' => 'file',
-            // 'store'  => 'redis',
-        ],
+    'maintenance' => [
+        'driver' => 'file',
+        // 'store'  => 'redis',
+    ],
 
-        /*
+    /*
         |--------------------------------------------------------------------------
         | Autoloaded Service Providers
         |--------------------------------------------------------------------------
@@ -155,23 +155,23 @@
         |
         */
 
-        'providers' => ServiceProvider::defaultProviders()->merge([
-            /*
+    'providers' => ServiceProvider::defaultProviders()->merge([
+        /*
              * Package Service Providers...
              */
 
-            /*
+        /*
              * Application Service Providers...
              */
-            App\Providers\AppServiceProvider::class,
-            App\Providers\AuthServiceProvider::class,
-            // App\Providers\BroadcastServiceProvider::class,
-            App\Providers\EventServiceProvider::class,
-            App\Providers\RouteServiceProvider::class,
-            Livewire\LivewireServiceProvider::class,
-        ])->toArray(),
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
+        Livewire\LivewireServiceProvider::class,
+    ])->toArray(),
 
-        /*
+    /*
         |--------------------------------------------------------------------------
         | Class Aliases
         |--------------------------------------------------------------------------
@@ -182,8 +182,8 @@
         |
         */
 
-        'aliases' => Facade::defaultAliases()->merge([
-            // 'Example' => App\Facades\Example::class,
-        ])->toArray(),
+    'aliases' => Facade::defaultAliases()->merge([
+        // 'Example' => App\Facades\Example::class,
+    ])->toArray(),
 
-    ];
+];
