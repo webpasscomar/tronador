@@ -22,5 +22,10 @@ class RolesTableSeeder extends Seeder
         $rol2->id     = 2;
         $rol2->name = 'Editor';
         $rol2->save();
+
+        $rol2 = new Role();
+        $rol2->id     = 3;
+        $rol2->name = 'UsuarioApp';
+        $rol2->save();
     }
 }
