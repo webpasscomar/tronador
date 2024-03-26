@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiAuthController;
 use App\Http\Controllers\Api\ApiTrailsController;
+use App\Http\Controllers\Api\ApiNationalitiesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,3 +28,5 @@ Route::post('/login', [ApiAuthController::class, 'login']);
 // Route::middleware('auth:sanctum')->group(function () {
 Route::get('/trails/v1', [ApiTrailsController::class, 'index'])->middleware('auth:sanctum');
 // });
+
+Route::get('/nationalities/v1', [ApiNationalitiesController::class, 'index'])->middleware('auth:sanctum');
