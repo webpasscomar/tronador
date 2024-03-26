@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\ApiAuthController;
+use App\Http\Controllers\Api\ApiTrailsController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+
+// Ruta para el login del usuario
+Route::post('/login', [ApiAuthController::class, 'login']);
+
+// Rutas Senderos
+// Route::middleware('auth:sanctum')->group(function () {
+Route::get('/trails/v1', [ApiTrailsController::class, 'index'])->middleware('auth:sanctum');
+// });

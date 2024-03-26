@@ -65,7 +65,7 @@ return [
 
     'logo' => '<b class="fs-4 navbar-brand">Piloto Tronador</b>',
     'logo_img' => 'img/argentina.ico',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo_img_class' => 'brand-image img-circle elevation-3 mt-1',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'tronador',
@@ -357,7 +357,7 @@ return [
             'text' => 'Alertas / Alerts',
             'route' => 'admin.alerts',
             'icon' => 'far fa-bell',
-            'can' => 'task-admin'
+            'can' => ['task-admin', 'task-sat']
         ]
         // [
         //     'text' => 'Novedades',
