@@ -22,6 +22,6 @@ class Institution extends Model
     }
     public function references()
     {
-        return $this->belongsTo(Reference::class,'institution_id');
+        return $this->belongsTo(Reference::class, 'institution_id');
     }
 }
