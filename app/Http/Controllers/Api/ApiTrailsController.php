@@ -3,16 +3,28 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Trail;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Throwable;
 
 class ApiTrailsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+
+
     public function index()
     {
-        //
+        try {
+            $trails = Trail::where('status', 1)->get();
+            return response()->json($trails, 200);
+        } catch (\Throwable $th) {
+            // throw ValidationException::withMessages(['message' => $th->getMessage()]);
+            return response()->json(['message' => $th->getMessage()], 400);
+        }
     }
 
     /**

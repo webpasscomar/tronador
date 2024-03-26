@@ -5,6 +5,8 @@ namespace App\Http;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use App\Http\Middleware\AdminRole;
 use App\Http\Middleware\AdminOrSatRole;
+use App\Http\Middleware\CheckAuthTokenMiddleware;
+
 
 class Kernel extends HttpKernel
 {
@@ -23,6 +25,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+
     ];
 
     /**
@@ -35,7 +38,6 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'adminRole' => AdminRole::class,
         'adminOrSatRole' => AdminOrSatRole::class,
-
     ];
     protected $middlewareGroups = [
         'web' => [

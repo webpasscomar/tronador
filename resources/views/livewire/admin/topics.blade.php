@@ -17,35 +17,35 @@
             <div class="table-responsive">
                 <table class="table table-hover table-striped table-bordered mt-3 datatable" id="myTable">
                     <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Tema</th>
-                        <th scope="col">Topic</th>
-                        <th scope="col" class="text-center" style="width: 15%">Acciones</th>
-                    </tr>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Tema</th>
+                            <th scope="col">Topic</th>
+                            <th scope="col" class="text-center" style="width: 15%">Acciones</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach ($topics as $key => $topic)
-                        <tr>
-                            <th scope="row" class="align-middle" scope="row">{{ $topic->id }}</th>
-                            <td class="align-middle">{{ $topic->name }}</td>
-                            <td class="align-middle">{{ $topic->nombre }}</td>
-                            <td class="align-middle">
-                                <div class="d-flex flex-md-row gap-1 justify-content-evenly">
-                                    <div class="m-1 mt-3">
-                                        <livewire:toggle-button :model="$topic" field="status"
-                                                                key="{{ $topic->id }}"/>
-                                    </div>
-                                    <button wire:click="edit({{ $topic->id }})"
+                        @foreach ($topics as $key => $topic)
+                            <tr>
+                                <th scope="row" class="align-middle" scope="row">{{ $topic->id }}</th>
+                                <td class="align-middle">{{ $topic->nombre }}</td>
+                                <td class="align-middle">{{ $topic->name }}</td>
+                                <td class="align-middle">
+                                    <div class="d-flex flex-md-row gap-1 justify-content-evenly">
+                                        <div class="m-1 mt-3">
+                                            <livewire:toggle-button :model="$topic" field="status"
+                                                key="{{ $topic->id }}" />
+                                        </div>
+                                        <button wire:click="edit({{ $topic->id }})"
                                             class="btn btn-sm btn-primary m-1" data-toggle="modal"
                                             data-target="#roleModal" title="Editar"><i class="fa fa-edit"></i></button>
-                                    <button wire:click="$emit('alertDelete',{{ $topic->id }})"
+                                        <button wire:click="$emit('alertDelete',{{ $topic->id }})"
                                             class="btn btn-sm btn-danger m-1" title="Eliminar"><i
-                                            class="fas fa-trash-alt" style="color: white "></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
+                                                class="fas fa-trash-alt" style="color: white "></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
