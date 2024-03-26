@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiAuthController;
 use App\Http\Controllers\Api\ApiTrailsController;
 use App\Http\Controllers\Api\ApiNationalitiesController;
+use App\Http\Controllers\Api\ApiUsersController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,3 +31,6 @@ Route::get('/trails/v1', [ApiTrailsController::class, 'index'])->middleware('aut
 // });
 
 Route::get('/nationalities/v1', [ApiNationalitiesController::class, 'index'])->middleware('auth:sanctum');
+
+
+Route::post('/users/v1', [ApiUsersController::class, 'store']);
