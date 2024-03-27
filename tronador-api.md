@@ -14,7 +14,8 @@ servidor (local) : [localhost](http://127.0.0.1:8000)
 
  1. En phone y nationality_id enviar datos numéricos.
  2. Phone acepta entre 8 y 20 dígitos
- 3. Request **Headers**:
+ 3. A los usuarios que se registran desde la app se les asigna el rol de **User** 
+ 4. Request **Headers**:
  
 >|key| value |
 >|--|--|
