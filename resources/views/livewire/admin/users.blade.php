@@ -15,42 +15,42 @@
             <div class="table-responsive">
                 <table class="table table-hover table-bordered mt-3 datatable" id="myTable">
                     <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">E-mail</th>
-                        <th scope="col">Institución</th>
-                        <th scope="col" style="width: 15%" class="text-center">Acciones</th>
-                    </tr>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">E-mail</th>
+                            <th scope="col">Institución</th>
+                            <th scope="col" style="width: 15%" class="text-center">Acciones</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach ($users as $user)
-                        <tr>
-                            <th scope="row" class="align-middle">{{ $user->id }}</th>
-                            <td class="align-middle">{{ $user->name }}</td>
-                            <td class="align-middle">{{ $user->lastname }}</td>
-                            <td class="align-middle">{{ $user->email }}</td>
-                            <td class="align-middle">{{ $user->institutions->initial }}</td>
-                            <td class="align-middle">
-                                <div class="d-flex flex-md-row gap-1 justify-content-evenly">
-                                    <button wire:click="edit({{ $user->id }})" class="btn btn-sm btn-primary"
+                        @foreach ($users as $user)
+                            <tr>
+                                <th scope="row" class="align-middle">{{ $user->id }}</th>
+                                <td class="align-middle">{{ $user->name }}</td>
+                                <td class="align-middle">{{ $user->lastname }}</td>
+                                <td class="align-middle">{{ $user->email }}</td>
+                                <td class="align-middle">{{ $user->institutions->initial ?? null }}</td>
+                                <td class="align-middle">
+                                    <div class="d-flex flex-md-row gap-1 justify-content-evenly">
+                                        <button wire:click="edit({{ $user->id }})" class="btn btn-sm btn-primary"
                                             data-toggle="modal" data-target="#roleModal" title="Editar"><i
-                                            class="fa fa-edit"></i></button>
-                                    <button wire:click="$emit('alertDelete',{{ $user->id }})"
+                                                class="fa fa-edit"></i></button>
+                                        <button wire:click="$emit('alertDelete',{{ $user->id }})"
                                             class="btn btn-sm btn-danger" title="Eliminar"><i class="fas fa-trash-alt"
-                                                                                              style="color: white "></i>
-                                    </button>
-                                    <button wire:click="changepass({{ $user->id }})" class="btn btn-sm btn-info"
+                                                style="color: white "></i>
+                                        </button>
+                                        <button wire:click="changepass({{ $user->id }})" class="btn btn-sm btn-info"
                                             data-toggle="modal" data-target="#roleModal" title="Cambia Password"><i
-                                            class="fas fa-key" style="color: white "></i></button>
-                                    <button wire:click="roles({{ $user->id }})" class="btn btn-sm btn-warning"
+                                                class="fas fa-key" style="color: white "></i></button>
+                                        <button wire:click="roles({{ $user->id }})" class="btn btn-sm btn-warning"
                                             data-toggle="modal" data-target="#roleModal" title="Roles"><i
-                                            class="fa fa-bars"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
+                                                class="fa fa-bars"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

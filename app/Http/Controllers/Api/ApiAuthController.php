@@ -58,18 +58,18 @@ class ApiAuthController extends Controller
             $user = User::where('email', $request->email)->first();
 
             // Verificamos que rol tiene el usuario para asignarle permisos
-            if ($user) {
-                if ($user->roles->contains('name', 'Administrador')) {
-                    $permisos = ['*'];
-                    $mostrar_permisos = 'Tienes todos los permisos';
-                } else if ($user->roles->contains('name', 'Editor')) {
-                    $permisos = ['read', 'write'];
-                    $mostrar_permisos = 'Tienes permisos de lectura y escritura';
-                } else {
-                    $permisos = ['read'];
-                    $mostrar_permisos = 'Tienes permisos de lectura';
-                }
-            }
+            // if ($user) {
+            //     if ($user->roles->contains('name', 'Administrador')) {
+            //         $permisos = ['*'];
+            //         $mostrar_permisos = 'Tienes todos los permisos';
+            //     } else if ($user->roles->contains('name', 'Editor')) {
+            //         $permisos = ['read', 'write'];
+            //         $mostrar_permisos = 'Tienes permisos de lectura y escritura';
+            //     } else {
+            //         $permisos = ['read'];
+            //         $mostrar_permisos = 'Tienes permisos de lectura';
+            //     }
+            // }
             // si el usuario no existe o la contraseña no coincide devolvemos un error de credenciales incorrectas
 
             if (!$user || !Hash::check($request->password, $user->password)) {
@@ -85,7 +85,7 @@ class ApiAuthController extends Controller
             $token = $user->createToken('ApiToken', $permisos)->plainTextToken;
 
             return response()->json([
-                'message' => 'Usuario conectado con éxito. ' . $mostrar_permisos,
+                'message' => 'Usuario conectado con éxito.',
                 'authorization' => [
                     'token' => $token,
                     'type' => 'bearer',
