@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ApiNationalitiesController;
 use App\Http\Controllers\Api\ApiReferencesController;
 use App\Http\Controllers\Api\ApiUsersController;
 use App\Http\Controllers\Api\ApiPointsController;
+use App\Http\Controllers\Api\ApiAlertsController;
 
 /*
     |--------------------------------------------------------------------------
@@ -28,18 +29,26 @@ use App\Http\Controllers\Api\ApiPointsController;
 // Ruta para el login del usuario
 Route::post('/login', [ApiAuthController::class, 'login']);
 
-// Rutas Senderos
-// Route::middleware('auth:sanctum')->group(function () {
-Route::get('/trails/v1', [ApiTrailsController::class, 'index'])->middleware('auth:sanctum');
-
-// Rutas Natiocionalidades
-Route::get('/nationalities/v1', [ApiNationalitiesController::class, 'index'])->middleware('auth:sanctum');
-
-// Rutas Referencias
-Route::get('/references/v1/{topic_id}', [ApiReferencesController::class, 'byTopic'])->middleware('auth:sanctum');
-
 // Ruta para crear un nuevo usuario
 Route::post('/users/v1', [ApiUsersController::class, 'store']);
 
-// Rutas puntos
-Route::get('/points/v1/{trail_id}', [ApiPointsController::class, 'byTrail'])->middleware('auth:sanctum');
+
+// Rutas protegidas por auth:sanctum , se acceden con el token generado al loguearse
+
+Route::middleware('auth:sanctum')->group(function () {
+    // Rutas Senderos
+    Route::get('/trails/v1', [ApiTrailsController::class, 'index']);
+
+    // Rutas Natiocionalidades
+    Route::get('/nationalities/v1', [ApiNationalitiesController::class, 'index']);
+
+    // Rutas Referencias
+    Route::get('/references/v1/{topic_id}', [ApiReferencesController::class, 'byTopic']);
+
+
+    // Rutas puntos
+    Route::get('/points/v1/{trail_id}', [ApiPointsController::class, 'byTrail']);
+
+    // Rutas alertas
+    Route::get('/alerts/v1', [ApiAlertsController::class, 'index']);
+});
