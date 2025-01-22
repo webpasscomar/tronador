@@ -26,7 +26,8 @@ use App\Http\Livewire\Admin\Trails;
 Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 
-/*Protejo las rutas con el middleware AdminRole, para que los usuarios que no tengan el permiso de administrador
+
+/*Protejo las rutas con el middleware AdminRole, para que los usuarios que no tengan el rol de administrador
     no puedan acceder*/
 Route::middleware('adminRole')->group(function () {
     // Ruta Instituciones - Protegida
@@ -38,5 +39,11 @@ Route::middleware('adminRole')->group(function () {
     Route::get('/senderos', Trails::class)->name('admin.trails');
     Route::get('/referencias', References::class)->name('admin.references');
     Route::get('/puntos', Points::class)->name('admin.points');
+});
+
+
+/*Protejo las rutas con el middleware SatRole, para que los usuarios que no tengan el rol de Admin ó Sat
+    no puedan acceder*/
+Route::middleware('adminOrSatRole')->group(function () {
     Route::get('/alertas', Alerts::class)->name('admin.alerts');
 });

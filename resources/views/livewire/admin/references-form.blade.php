@@ -81,7 +81,7 @@
 
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="form-group"><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
+                        <div class="form-group">
                             <label for="image" class="custom-file-upload">Imágen</label>
                             <span id="file-name"></span>
 
@@ -95,33 +95,32 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="pdf" class="custom-file-upload">Pdf</label><span
-                                class="ms-1 text-danger fs-6 fw-semibold">*
+                            <label for="pdf" class="custom-file-upload">Pdf</label>
 
-                                <input type="file" id="pdf" accept="application/pdf"
-                                    class="form-control {{ $preview ? 'nocursor' : '' }}" wire:model="pdf"
-                                    wire:change="selectFile" @disabled($preview)>
-                                @error('pdf')
-                                    <span class="text-danger fw-normal">{{ $message }}</span>
-                                @enderror
-                                @if ($changeFile)
-                                    @if (gettype($pdf) === 'object')
-                                        <p class="mt-1 ms-1">
-                                            <i class="far fa-file-alt"></i>
-                                            <span class="text-secondary" title="{{ $pdf->getClientOriginalName() }}">
-                                                {{ Str::limit($pdf->getClientOriginalName(), 20) }}
-                                            </span>
-                                        </p>
-                                    @endif
-                                @endif
-                                @if (gettype($pdf) === 'string')
+                            <input type="file" id="pdf" accept="application/pdf"
+                                class="form-control {{ $preview ? 'nocursor' : '' }}" wire:model="pdf"
+                                wire:change="selectFile" @disabled($preview)>
+                            @error('pdf')
+                                <span class="text-danger fw-normal">{{ $message }}</span>
+                            @enderror
+                            @if ($changeFile)
+                                @if (gettype($pdf) === 'object')
                                     <p class="mt-1 ms-1">
                                         <i class="far fa-file-alt"></i>
-                                        <span class="text-secondary" title="{{ $reference->pdf }}">
-                                            {{ Str::limit($reference->pdf, 20) }}
+                                        <span class="text-secondary" title="{{ $pdf->getClientOriginalName() }}">
+                                            {{ Str::limit($pdf->getClientOriginalName(), 20) }}
                                         </span>
                                     </p>
                                 @endif
+                            @endif
+                            @if (gettype($pdf) === 'string')
+                                <p class="mt-1 ms-1">
+                                    <i class="far fa-file-alt"></i>
+                                    <span class="text-secondary" title="{{ $reference->pdf }}">
+                                        {{ Str::limit($reference->pdf, 20) }}
+                                    </span>
+                                </p>
+                            @endif
 
                         </div>
                     </div>

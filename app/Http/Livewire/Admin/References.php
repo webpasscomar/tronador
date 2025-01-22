@@ -50,8 +50,8 @@ class References extends Component
                 'name' => 'required|min:3',
                 'description' => 'required',
                 'descripcion' => 'required',
-                'image' => 'required|mimes:jpeg,png,jpg,svg|max:2048',
-                'pdf' => 'required|mimes:pdf|max:2048',
+                'image' => $this->changeImg ? 'mimes:jpeg,png,jpg,svg|max:2048' : '',
+                'pdf' => $this->changeFile ? 'mimes:pdf|max:2048' : '',
                 'topic_id' => 'required',
                 'institution_id' => 'required',
             ];

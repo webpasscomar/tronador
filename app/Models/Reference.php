@@ -26,10 +26,12 @@ class Reference extends Model
     {
         return $this->belongsTo(Institution::class, 'institution_id');
     }
+
     public function topics()
     {
         return $this->belongsTo(Topic::class, 'topic_id');
     }
+
     public function trails()
     {
         return $this->belongsTo(Trail::class, 'trail_id');

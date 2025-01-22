@@ -18,4 +18,9 @@ class Alert extends Model
         'institution_id',
         'status'
     ];
+
+    public function institutions()
+    {
+        return  $this->belongsTo(Institution::class, 'institution_id');
+    }
 }

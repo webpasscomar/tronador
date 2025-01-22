@@ -10,14 +10,14 @@ class CreateReferencesTable extends Migration
     {
         Schema::create('references', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');            
+            $table->string('nombre');
             $table->string('name');
             $table->text('descripcion');
             $table->text('description');
-            $table->string('image');
-            $table->string('pdf');
+            $table->string('image')->nullable();
+            $table->string('pdf')->nullable();
             $table->foreignId('topic_id')->constrained('topics');
-            $table->foreignId('trail_id')->constrained('trails');
+            $table->foreignId('trail_id')->nullable()->constrained('trails');
             $table->foreignId('institution_id')->constrained('institutions');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

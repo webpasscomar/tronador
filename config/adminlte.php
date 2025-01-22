@@ -357,7 +357,7 @@ return [
             'text' => 'Alertas / Alerts',
             'route' => 'admin.alerts',
             'icon' => 'far fa-bell',
-            'can' => 'task-admin'
+            'can' => ['task-admin', 'task-sat']
         ]
         // [
         //     'text' => 'Novedades',

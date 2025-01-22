@@ -26,8 +26,8 @@ class TopicsTableSeeder extends Seeder
         $topic3->save();
 
         $topic4 = new Topic();
-        $topic4->nombre = 'Climate Change';
-        $topic4->name = 'Cambio Climático';
+        $topic4->nombre = 'Cambio Climático';
+        $topic4->name = 'Climate Change';
         $topic4->save();
 
         $topic5 = new Topic();
@@ -39,6 +39,5 @@ class TopicsTableSeeder extends Seeder
         $topic6->nombre = 'Patrimonio';
         $topic6->name = 'Heritage';
         $topic6->save();
-      
     }
 }
