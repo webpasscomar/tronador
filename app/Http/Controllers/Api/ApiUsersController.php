@@ -31,6 +31,7 @@ class ApiUsersController extends Controller
             'lastname' => 'required',
             'phone' => 'required|digits_between:8,20|integer',
             'nationality_id' => 'required',
+            'birthday' => 'nullable|date|before:today',
         ]);
 
         try {
@@ -45,6 +46,7 @@ class ApiUsersController extends Controller
                 'lastname' => $request->lastname,
                 'phone' => $request->phone,
                 'nationality_id' => $request->nationality_id,
+                'birthday' => $request->birthday,
             ]);
 
 
