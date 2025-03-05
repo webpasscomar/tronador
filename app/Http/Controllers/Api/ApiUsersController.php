@@ -32,6 +32,7 @@ class ApiUsersController extends Controller
             'phone' => 'required|digits_between:8,20|integer',
             'nationality_id' => 'required',
             'birthday' => 'nullable|date|before:today',
+            'phone' => 'nullable',
         ]);
 
         try {
