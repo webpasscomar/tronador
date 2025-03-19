@@ -43,9 +43,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/nationalities/v1', [ApiNationalitiesController::class, 'index']);
 
     // Rutas Referencias
+    Route::get('/references/v1', 
+    [ApiReferencesController::class, 'index']);
+
     Route::get('/references/v1/{topic_id}', [ApiReferencesController::class, 'byTopic']);
 
-
+    
     // Rutas puntos
     Route::get('/points/v1/{trail_id}', [ApiPointsController::class, 'byTrail']);
 

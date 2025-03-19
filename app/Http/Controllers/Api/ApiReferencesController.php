@@ -16,7 +16,21 @@
          */
         public function index()
         {
-            //
+            try {
+                $references =
+                    Reference::where('references.status', 1)
+                        ->orderBy('name', 'ASC')
+                        ->join('institutions', 'references.institution_id', '=', 'institutions.id')
+                        ->select('references.nombre', 'references.name', 'references.descripcion', 'references.description', 'references.image', 'references.pdf', 'references.trail_id', 'institutions.initial')
+                        ->get();
+
+                if ($references->isEmpty()) {
+                    return response()->json(['message' => 'No existen referencias'], 404);
+                }
+                return response()->json($references, 200);
+            } catch (\Throwable $th) {
+                return response()->json(['message' => $th->getMessage()], 400);
+            }
         }
 
         /**
