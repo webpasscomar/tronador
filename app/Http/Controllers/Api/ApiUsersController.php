@@ -65,11 +65,39 @@ class ApiUsersController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Revisa el usuario
      */
-    public function show(string $id)
+    public function byUser($email)
     {
-        //
+        try {
+            $user = User::where('email', $email)
+                ->first();
+            // Si no existe usuario
+            if ($user->isEmpty()) {
+                return response()->json([
+                    'message' => 'No existe el usuario'
+                ], 404);
+            } else {
+                // validamos que esté activo?
+                $user->transform(function ($user) {
+                    return [
+                        'name' => $user->name,
+                        'lastname' => $user->lastname,
+                        'password' => $user->password,
+                        'phone' => $user->phone,
+                        'birthday' => $user->birthday,
+                        'nationality' => $user->nationality_id,
+                    ];
+                });
+            }
+            // Mensaje de éxito
+            return \response()->json($user, 200);
+        } catch (\Throwable $th) {
+            // Cualquier otro error lo manejamos con error 500 - error interno de servidor
+            return response()->json([
+                'message' => $th->getMessage()
+            ], 500);
+        }
     }
 
     /**
