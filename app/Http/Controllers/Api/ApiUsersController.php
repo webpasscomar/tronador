@@ -29,7 +29,6 @@ class ApiUsersController extends Controller
             'password' => 'required',
             'repassword' => 'required|same:password',
             'lastname' => 'required',
-            'phone' => 'required|digits_between:8,20|integer',
             'nationality_id' => 'required',
             'birthday' => 'nullable|date|before:today',
             'phone' => 'nullable',
@@ -63,74 +62,33 @@ class ApiUsersController extends Controller
             return response()->json(['message' => 'Error al registrar el usuario'], 500);
         }
     }
-    public function byUser($email)
-    {
-        try {
-            $user = User::where('email', $email)
-                ->first();
-            // Si no existe usuario
-            if ($user->isEmpty()) {
-                return response()->json([
-                    'message' => 'No existe el usuario'
-                ], 404);
-            } else {
-                // validamos que esté activo?
-                $user->transform(function ($user) {
-                    return [
-                        'name' => $user->name,
-                        'lastname' => $user->lastname,
-                        'password' => $user->password,
-                        'phone' => $user->phone,
-                        'birthday' => $user->birthday,
-                        'nationality' => $user->nationality_id,
-                    ];
-                });
-            }
-            // Mensaje de éxito
-            return \response()->json($user, 200);
-        } catch (\Throwable $th) {
-            // Cualquier otro error lo manejamos con error 500 - error interno de servidor
-            return response()->json([
-                'message' => $th->getMessage()
-            ], 500);
-        }
-    }
-
     /**
      * Revisa el usuario
+    * @param  string  $email
+     * @return \Illuminate\Http\JsonResponse
      */
     public function byUser($email)
     {
-        try {
-            $user = User::where('email', $email)
-                ->first();
-            // Si no existe usuario
-            if ($user->isEmpty()) {
-                return response()->json([
-                    'message' => 'No existe el usuario'
-                ], 404);
-            } else {
-                // validamos que esté activo?
-                $user->transform(function ($user) {
-                    return [
-                        'name' => $user->name,
-                        'lastname' => $user->lastname,
-                        'password' => $user->password,
-                        'phone' => $user->phone,
-                        'birthday' => $user->birthday,
-                        'nationality' => $user->nationality_id,
-                    ];
-                });
-            }
-            // Mensaje de éxito
-            return \response()->json($user, 200);
-        } catch (\Throwable $th) {
-            // Cualquier otro error lo manejamos con error 500 - error interno de servidor
+        // Buscar al usuario por el correo electrónico
+        $user = User::where('email', $email)->first();
+
+        // Verificar si el usuario existe
+        if ($user) {
+            // Si el usuario existe, retornar una respuesta JSON con estado 200
             return response()->json([
-                'message' => $th->getMessage()
-            ], 500);
+                'exists' => true,
+                'message' => 'Usuario encontrado.',
+                'user' => $user  // Puedes incluir información del usuario si es necesario
+            ]);
+        } else {
+            // Si no se encuentra el usuario, retornar una respuesta JSON con estado 404
+            return response()->json([
+                'exists' => false,
+                'message' => 'Usuario no encontrado.'
+            ], 404);
         }
     }
+
 
     /**
      * Update the specified resource in storage.
