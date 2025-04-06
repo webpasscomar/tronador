@@ -12,7 +12,7 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: #3332">
                 <h5 class="modal-title" id="roleModalLabel">
-                    Referencia
+                    Contenido
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" wire:click="closeModal">
                     <span aria-hidden="true">&times;</span>

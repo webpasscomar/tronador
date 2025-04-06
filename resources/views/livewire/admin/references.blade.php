@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row mb-3">
             <div class="col-md-8 col-6 mt-4">
-                <h3>Referencias</h3>
+                <h3>Contenidos</h3>
             </div>
             <div class="col-md-4 col-6 mt-3 mt-md-4 text-right">
                 <button wire:click="create" class="btn btn-success" data-toggle="modal" data-target="#roleModal"><i

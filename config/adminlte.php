@@ -342,7 +342,7 @@ return [
             'can' => 'task-admin'
         ],
         [
-            'text' => 'Referencias',
+            'text' => 'Contenidos',
             'route' => 'admin.references',
             'icon' => 'far fa-map',
             'can' => 'task-admin'

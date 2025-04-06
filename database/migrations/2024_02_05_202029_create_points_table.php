@@ -12,12 +12,12 @@ class CreatePointsTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('name');
-            $table->text('descripcion');
-            $table->text('description');
+            $table->text('descripcion')->nullable();
+            $table->text('description')->nullable();
             $table->string('image');
             $table->string('lat');
             $table->string('lng');
-            $table->string('pdf');
+            $table->string('pdf')->nullable();
             $table->foreignId('tipo_id')->constrained('tipos');
             $table->foreignId('trail_id')->constrained('trails');
             $table->foreignId('institution_id')->constrained('institutions');

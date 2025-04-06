@@ -63,7 +63,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="descripcion">Descripción</label><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
+                    <label for="descripcion">Descripción</label><span class="ms-1 text-danger fs-6 fw-semibold"></span>
                     <textarea id="descripcion" rows="2" class="form-control {{ $preview ? 'nocursor' : '' }}" wire:model='descripcion'
                         @disabled($preview)></textarea>
                     @error('descripcion')
@@ -71,7 +71,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="description">Description</label><span class="ms-1 text-danger fs-6 fw-semibold">*</span>
+                    <label for="description">Description</label><span class="ms-1 text-danger fs-6 fw-semibold"></span>
                     <textarea id="description" rows="2" class="form-control {{ $preview ? 'nocursor' : '' }}"
                         wire:model='description' @disabled($preview)></textarea>
                     @error('description')
@@ -96,7 +96,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="pdf" class="custom-file-upload">Pdf</label><span
-                                class="ms-1 text-danger fs-6 fw-semibold">*
+                                class="ms-1 text-danger fs-6 fw-semibold">
 
                                 <input type="file" id="pdf" accept="application/pdf"
                                     class="form-control {{ $preview ? 'nocursor' : '' }}" wire:model="pdf"
