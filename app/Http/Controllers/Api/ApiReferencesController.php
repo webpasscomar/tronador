@@ -40,7 +40,7 @@
         {
             //
             try {
-                $trails =
+                $refs =
                     Reference::where('references.status', 1)
                         ->orderBy('name', 'ASC')
                         ->where('topic_id', $topic_id)
@@ -48,10 +48,30 @@
                         ->select('references.nombre', 'references.name', 'references.descripcion', 'references.description', 'references.image', 'references.pdf', 'references.trail_id', 'institutions.initial')
                         ->get();
 
-                if ($trails->isEmpty()) {
-                    return response()->json(['message' => 'No existen referencias para ese topic'], 404);
+                if ($refs->isEmpty()) {
+                    return response()->json(['message' => 'No existe contenido para ese topic'], 404);
                 }
-                return response()->json($trails, 200);
+                return response()->json($refs, 200);
+            } catch (\Throwable $th) {
+                return response()->json(['message' => $th->getMessage()], 400);
+            }
+        }
+        public function byTrail($trail_id)
+        {
+            //
+            try {
+                $refs =
+                    Reference::where('references.status', 1)
+                        ->orderBy('name', 'ASC')
+                        ->where('trail_id', $trail_id)
+                        ->join('institutions', 'references.institution_id', '=', 'institutions.id')
+                        ->select('references.nombre', 'references.name', 'references.descripcion', 'references.description', 'references.image', 'references.pdf', 'topic_id', 'institutions.initial')
+                        ->get();
+
+                if ($refs->isEmpty()) {
+                    return response()->json(['message' => 'No existe contenido para ese sendero'], 404);
+                }
+                return response()->json($refs, 200);
             } catch (\Throwable $th) {
                 return response()->json(['message' => $th->getMessage()], 400);
             }
