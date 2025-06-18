@@ -54,7 +54,12 @@ use Throwable;
                         ->where('topic_id', $topic_id)
                         ->join('institutions', 'references.institution_id', '=', 'institutions.id')
                         ->select('references.nombre', 'references.name', 'references.descripcion', 'references.description', 'references.image', 'references.pdf', 'references.trail_id', 'institutions.initial')
-                        ->get();
+                        ->get()
+                        ->map(function ($reference) {
+                            $reference->image = $reference->image ? Storage::url('referencias/' . $reference->image) : null;
+                            $reference->pdf = $reference->pdf ? Storage::url('referencias/' . $reference->pdf) : null;
+                            return $reference;
+                        });
 
                 if ($refs->isEmpty()) {
                     return response()->json(['message' => 'No existe contenido para ese topic'], 404);
@@ -74,7 +79,12 @@ use Throwable;
                         ->where('trail_id', $trail_id)
                         ->join('institutions', 'references.institution_id', '=', 'institutions.id')
                         ->select('references.nombre', 'references.name', 'references.descripcion', 'references.description', 'references.image', 'references.pdf', 'topic_id', 'institutions.initial')
-                        ->get();
+                        ->get()
+                        ->map(function ($reference) {
+                            $reference->image = $reference->image ? Storage::url('referencias/' . $reference->image) : null;
+                            $reference->pdf = $reference->pdf ? Storage::url('referencias/' . $reference->pdf) : null;
+                            return $reference;
+                        });
 
                 if ($refs->isEmpty()) {
                     return response()->json(['message' => 'No existe contenido para ese sendero'], 404);
