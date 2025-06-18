@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Trail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Throwable;
 
@@ -19,7 +20,13 @@ class ApiTrailsController extends Controller
     public function index()
     {
         try {
-            $trails = Trail::where('status', 1)->get();
+            $trails = Trail::where('status', 1)
+                ->get()
+                ->map(function ($trail){
+                    $trail->image = $trail->image ? Storage::url('senderos/' . $trail->image) : null;
+                    $trail->geom = $trail->geom ? Storage::url('senderos/' . $trail->geom) : null;
+                    return $trail;
+                });
             return response()->json($trails, 200);
         } catch (\Throwable $th) {
             // throw ValidationException::withMessages(['message' => $th->getMessage()]);

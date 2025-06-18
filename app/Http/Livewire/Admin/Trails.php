@@ -164,6 +164,12 @@ class Trails extends Component
             Storage::disk('public')->delete('senderos/' . $trail->image);
         }
 
+        //eliminamos el archivo anterior buscando primero el registro que contiene ese archivo
+         if ($this->changeFile && $this->action == 'edit') {
+            $trail = Trail::findOrFail($this->trail_id);
+            Storage::disk('public')->delete('senderos/' . $trail->geom);
+        }
+
         // Si se elige una imagen cuando creamos un registro se guarda con su nombre original
         if ($this->changeImg) {
             $image_name = $this->image->getClientOriginalName();
@@ -176,7 +182,9 @@ class Trails extends Component
 
         //si existe un arhivo recorrido se guarda en la base de datos el nombre TODO:modo provisorio
         if ($this->changeFile) {
-            $file_name = $this->geom->getClientOriginalName();
+            $file_name = str_replace(' ','_',$this->geom->getClientOriginalName());
+            // dd($file_name);
+            $this->geom->storeAs('senderos', $file_name); // Guardamos el archivo con su nombre original
             $this->changeFile = false;
         } else {
             $file_name = $this->geom;

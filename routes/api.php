@@ -32,11 +32,11 @@ Route::post('/login', [ApiAuthController::class, 'login']);
 // Ruta para crear un nuevo usuario
 Route::post('/users/v1', [ApiUsersController::class, 'store']);
 
-Route::get('/users/v1/{email}', [ApiUsersController::class, 'byUser']);
-
 // Rutas protegidas por auth:sanctum , se acceden con el token generado al loguearse
 
 Route::middleware('auth:sanctum')->group(function () {
+    // Ruta para obtener el usuario por email con el detalle del mismo
+    Route::get('/users/v1/{email}', [ApiUsersController::class, 'byUser']);
     // Rutas Senderos
     Route::get('/trails/v1', [ApiTrailsController::class, 'index']);
 

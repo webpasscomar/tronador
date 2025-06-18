@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Point;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ApiPointsController extends Controller
 {
@@ -47,11 +48,11 @@ class ApiPointsController extends Controller
                         'name' => $point->name,
                         'descripcion' => $point->descripcion,
                         'decription' => $point->description,
-                        'image' => $point->image,
-                        'pdf' => $point->pdf,
+                        'image' => $point->image ? Storage::url('puntos/'. $point->image) :null,
+                        'pdf' => $point->pdf ? Storage::url('puntos/'. $point->pdf): null,
                         'lat' => $point->lat,
                         'lng' => $point->lng,
-                        'icon' => $point->tipos->icon,
+                        'icon' => Storage::url('iconos/'.$point->tipos->icon),
                         'institution' => $point->institutions->initial,
                     ];
                 });

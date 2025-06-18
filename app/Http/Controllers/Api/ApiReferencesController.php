@@ -6,7 +6,8 @@
     use Illuminate\Http\Request;
     use App\Models\Reference;
     use App\Models\Institution;
-    use Throwable;
+use Illuminate\Support\Facades\Storage;
+use Throwable;
     use function PHPUnit\Framework\isEmpty;
 
     class ApiReferencesController extends Controller
@@ -22,11 +23,18 @@
                         ->orderBy('name', 'ASC')
                         ->join('institutions', 'references.institution_id', '=', 'institutions.id')
                         ->select('references.nombre', 'references.name', 'references.descripcion', 'references.description', 'references.image', 'references.pdf', 'references.trail_id', 'institutions.initial')
-                        ->get();
+                        ->get()
+                        ->map(function ($reference) {
+                            $reference->image = $reference->image ? Storage::url('referencias/' . $reference->image) : null;
+                            $reference->pdf = $reference->pdf ? Storage::url('referencias/' . $reference->pdf) : null;
+                            return $reference;
+                        });
 
                 if ($references->isEmpty()) {
                     return response()->json(['message' => 'No existen referencias'], 404);
                 }
+
+            
                 return response()->json($references, 200);
             } catch (\Throwable $th) {
                 return response()->json(['message' => $th->getMessage()], 400);

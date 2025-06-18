@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\User_rol;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -70,10 +71,18 @@ class ApiUsersController extends Controller
     public function byUser($email)
     {
         // Buscar al usuario por el correo electrónico
-        $user = User::where('email', $email)->first();
+        $user = User::where('email', $email)
+            ->with(['institutions','nationalities'])
+            ->first();
 
         // Verificar si el usuario existe
         if ($user) {
+            //Cambiar para mostrar la nacionalidad y la institución sin mostrar el id
+            $user->nationality = $user->nationalities->name ?? null;
+            $user->institution = $user->institutions->name ?? null;
+            // No mostrar los campos de nacionalidades e instituciones con los ids y los objectos completos de navionalidad e institucion
+            unset($user->nationalities, $user->institutions, $user->nationality_id, $user->institution_id);
+
             // Si el usuario existe, retornar una respuesta JSON con estado 200
             return response()->json([
                 'exists' => true,
