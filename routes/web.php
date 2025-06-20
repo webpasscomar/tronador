@@ -23,5 +23,10 @@
         ['register' => false]
     );
 
+    // Reedirigir a la ruta de login
+    Route::match(['get', 'post','put','patch','delete'], '/register', function () {
+        return redirect()->route('login');
+    });
+
     Route::get('/', [HomeController::class, 'index'])->name('home');
     //Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
